@@ -134,7 +134,7 @@ Budget: Framer Motion only. No GSAP, no scroll-jacking libraries, no three.js un
 - **Pipeline:** GitHub → Next.js (App Router, TypeScript) → Vercel. Every push to `main` deploys; PRs get preview URLs.
 - Repo: `https://github.com/marwantosolve/maro-portfolio.git`
 - Keep the repo self-contained: no server-side secrets; Substack fetch is public RSS; everything must build cleanly on Vercel with zero config beyond defaults.
-- **Hosting: Vercel Hobby (free)** — import the GitHub repo at vercel.com, every push to `main` auto-deploys, PRs get preview URLs. Free subdomain included: `*.vercel.app` (e.g. `marwantosolve.vercel.app`).
+- **Hosting: Vercel Hobby (free)** — repo connected 2026-09-14. Live URL: **https://marwantosolve-portfolio.vercel.app** (currently 404 — expected, repo has no app yet; it will serve the site from the first foundations-sprint push). Every push to `main` auto-deploys; PRs get preview URLs.
 - **Free domain options (ranked):**
   1. `*.vercel.app` subdomain — zero cost, zero maintenance, ready immediately. Start here.
   2. **GitHub Student Developer Pack → Namecheap free `.me` for 1 year** (education.github.com/pack) — Marwan is a student at Cairo University until Jul 2026, so eligible; verification via student email/SheerID. Renewal is paid after year 1.
