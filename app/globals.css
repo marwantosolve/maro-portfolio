@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Design tokens — dark-first.
+  Near-monochrome ink surfaces, one precise accent (signal lime),
+  typographic identity via Space Grotesk / Inter / JetBrains Mono.
+*/
+
+:root {
+  --background: #f7f7f4;
+  --surface: #ffffff;
+  --surface-2: #efefe8;
+  --border: #e1e1d8;
+  --foreground: #15171b;
+  --muted: #5d6470;
+  --accent: #c6f24e;
+  --accent-ink: #161a09;
+  --accent-text: #526e08;
+  --grid-line: rgba(21, 23, 27, 0.055);
+}
+
+.dark {
+  --background: #0a0b0d;
+  --surface: #101216;
+  --surface-2: #16181d;
+  --border: #23272f;
+  --foreground: #e9ebee;
+  --muted: #98a0ac;
+  --accent: #c6f24e;
+  --accent-ink: #161a09;
+  --accent-text: #c6f24e;
+  --grid-line: rgba(233, 235, 238, 0.045);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  /* technical blueprint grid used behind hero + section canvases */
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
