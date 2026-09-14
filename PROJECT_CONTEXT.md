@@ -61,6 +61,7 @@ Positioning pillars (all CV-backed):
 **Storytelling pattern for case studies:** each project opens with the *question it answers with data* (this phrasing already exists in the ForgeLM and VisionTrack READMEs and should become the site's signature): context → approach → architecture → results (only real ones) → what's next / status.
 
 ### Experience (CV, verbatim facts)
+> **Status note (2026-09-14, per Marwan):** do **not** present Ericsson as current employment anywhere on the site — it was an Ericsson-sponsored graduation project, and Marwan is currently not employed. No "currently at X" hero line, no "Present" end-date framing. Frame it simply by its dates and what it was.
 - **Ericsson — AI Research Engineer**, Cairo, Oct 2025 – Present. Ericsson-sponsored graduation project; developing MASEF; designing evaluation protocols, metrics, reproducible experimentation pipelines; collaborating with R&D on AI engineering architectures and research workflows.
 - **Codveda — Machine Learning Intern**, Remote, Sep 2025. Predictive modeling with TensorFlow, Keras, Scikit-learn; Pandas/NumPy preprocessing; algorithm application and hyperparameter tuning.
 - **Education:** BSc Computer Science, AI Department, Cairo University, Oct 2022 – Jul 2026, GPA 3.3.
