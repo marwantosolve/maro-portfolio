@@ -133,6 +133,13 @@ Budget: Framer Motion only. No GSAP, no scroll-jacking libraries, no three.js un
 - **Pipeline:** GitHub → Next.js (App Router, TypeScript) → Vercel. Every push to `main` deploys; PRs get preview URLs.
 - Repo: `https://github.com/marwantosolve/maro-portfolio.git`
 - Keep the repo self-contained: no server-side secrets; Substack fetch is public RSS; everything must build cleanly on Vercel with zero config beyond defaults.
+- **Hosting: Vercel Hobby (free)** — import the GitHub repo at vercel.com, every push to `main` auto-deploys, PRs get preview URLs. Free subdomain included: `*.vercel.app` (e.g. `marwantosolve.vercel.app`).
+- **Free domain options (ranked):**
+  1. `*.vercel.app` subdomain — zero cost, zero maintenance, ready immediately. Start here.
+  2. **GitHub Student Developer Pack → Namecheap free `.me` for 1 year** (education.github.com/pack) — Marwan is a student at Cairo University until Jul 2026, so eligible; verification via student email/SheerID. Renewal is paid after year 1.
+  3. **is-a.dev** — free developer subdomain (`yourname.is-a.dev`) via a GitHub pull request; community-run, no fees.
+  4. Later, paid at-cost (~$10–12/yr): `.dev`/`.com` via Cloudflare Registrar — good when ready to commit long-term.
+- Domain connection in Vercel: Project → Settings → Domains → add domain → follow DNS instructions.
 - Content lives in-repo as **MDX / structured data** (project case studies, about, experience) so content edits are git commits.
 
 ## 10. Technical Constraints
@@ -179,7 +186,6 @@ maro-portfolio/
 │   │   ├── page.tsx              # Selected Work — index of 5 projects
 │   │   └── [slug]/page.tsx       # Case study (MDX-driven): question → approach →
 │   │                             #   architecture (animated graph) → results → status
-│   ├── research/page.tsx         # MASEF publication + research direction
 │   ├── writing/page.tsx          # Substack feed (build-time RSS), featured + grid
 │   ├── experience/page.tsx       # Ericsson, Codveda, education, hackathons, certifications
 │   ├── about/page.tsx            # Narrative bio, skills as curated capability areas
@@ -199,21 +205,27 @@ maro-portfolio/
     └── content.ts                # project/experience loaders
 ```
 
-**Sitemap:** Home · Work (index) · Work/`{masef,atlas,handelny,forgelm,visiontrack}` · Research · Writing · Experience · About · Contact.
+**Sitemap:** Home · Work (index) · Work/`{masef,atlas,handelny,forgelm,visiontrack}` · Writing · Experience · About · Contact.
+**Decision (2026-09-14):** no separate Research page — everything is a project; MASEF (and its publication status) lives as a case study under Work.
 
 **Navigation decision to make:** single-page with anchored sections vs. multi-page (architecture above assumes multi-page with strong page transitions — matches the "smooth page transitions" motion goal; Home carries previews of every section).
 
 ## 13. Open Questions (for Marwan)
 
-1. **MASEF** — is there a repo/link? What is publishable given "in publishing progress"? Should the case study exist before the paper's status resolves?
+**Decided 2026-09-14:**
+- ❌ No separate Research section — all projects, MASEF under Work.
+- ⏸ Everything below: Marwan will set/customize later — build with sensible CV-backed defaults and placeholders, easy to swap.
+
+**Deferred to Marwan:**
+
+1. **MASEF** — is there a repo/link? What is publishable given "in publishing progress"?
 2. **Metrics** — which real numbers from ForgeLM/VisionTrack experiments may be shown? (READMEs contain real results; confirm which are final.)
 3. **Contact details on the site** — email only, or also phone/socials beyond GitHub/LinkedIn/Substack?
 4. **Theme** — dark-first, light-first, or both with toggle?
 5. **Avatar production route** — real-time 3D vs. pre-rendered vs. SVG/Lottie (fidelity vs. performance vs. effort).
 6. **Single-page vs. multi-page** (see §12).
 7. **Photography** — should any real photo appear (e.g., About), or avatar-only?
-8. **Research section scope** — MASEF only, or also hackathon/research-adjacent work?
-9. **Domain** — custom domain on Vercel (e.g., marwan.dev / marwantosolve.com)?
+8. **Hero inputs** — see §14; draft copy will be proposed from CV facts for approval.
 
 ## 14. Missing Content (blocking items)
 
