@@ -43,11 +43,12 @@ export default function ContactPage() {
       <Reveal>
         <SectionHeader index="05" title="Contact" />
         <h1 className="mt-8 max-w-2xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-          Building something with LLMs? Let&apos;s talk.
+          Got an interesting problem? Let&apos;s talk.
         </h1>
         <p className="mt-6 max-w-lg text-base leading-relaxed text-muted">
-          The fastest way to reach me is email. I&apos;m always up for talking
-          about agentic systems, evaluation, RAG, or model adaptation.
+          AI engineering, LLM systems, research, agentic systems — if it&apos;s
+          a technical problem worth solving, I&apos;m interested. The fastest
+          way to reach me is email.
         </p>
         <p className="mt-8 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
           <MapPin size={13} strokeWidth={1.75} />

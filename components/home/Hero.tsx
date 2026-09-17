@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, PenLine } from "lucide-react";
-import { AvatarMark } from "./AvatarMark";
+import { Avatar } from "./Avatar";
+import { PipelineFlow, TopologyBackground } from "@/components/viz/TopologyBackground";
 import { site } from "@/lib/site";
 
 const focusAreas = [
@@ -11,8 +12,9 @@ const focusAreas = [
   "Agentic AI",
   "Multi-Agent Systems",
   "RAG",
-  "AI Evaluation",
   "Model Adaptation",
+  "AI Evaluation",
+  "AI Infrastructure",
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -31,9 +33,10 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden />
+      {/* ambient topology — the site's visual system */}
+      <TopologyBackground seed={11} />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pb-20 pt-36 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:pb-28 lg:pt-44">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pb-16 pt-36 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:pb-24 lg:pt-44">
         {/* copy */}
         <div>
           <motion.p
@@ -41,25 +44,27 @@ export function Hero() {
             className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted"
           >
             <span className="inline-block h-1.5 w-1.5 bg-accent" aria-hidden />
-            {site.role} — {site.location}
+            {site.name} — {site.role}
           </motion.p>
 
           <motion.h1
             {...fadeUp(0.1)}
-            className="mt-6 font-display text-5xl font-bold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl"
+            className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           >
-            Agentic AI,
+            AI systems that
             <br />
-            built to be <span className="text-accent-text">measured</span>.
+            reason, retrieve,
+            <br />
+            adapt, <span className="text-accent-text">and act</span>.
           </motion.h1>
 
           <motion.p
             {...fadeUp(0.2)}
             className="mt-7 max-w-lg text-base leading-relaxed text-muted sm:text-lg"
           >
-            I&apos;m {site.name} — an AI engineer working across large language
-            models, multi-agent systems, RAG, and model adaptation, taking AI
-            systems from research concepts to production.
+            I&apos;m an AI engineer and researcher working across large
+            language models, agentic and multi-agent systems, retrieval, and
+            model adaptation — from research concepts to production.
           </motion.p>
 
           <motion.div {...fadeUp(0.3)} className="mt-10 flex flex-wrap items-center gap-4">
@@ -100,37 +105,18 @@ export function Hero() {
         </div>
 
         {/* avatar */}
-        <motion.div
-          {...fadeUp(0.25)}
-          className="relative mx-auto w-full max-w-[360px]"
-        >
-          <motion.div
-            animate={reduce ? undefined : { y: [0, -7, 0] }}
-            transition={reduce ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            {/* technical frame */}
-            <div className="relative border border-border bg-surface p-6">
-              <span aria-hidden className="absolute -left-px -top-px h-4 w-4 border-l-2 border-t-2 border-accent" />
-              <span aria-hidden className="absolute -right-px -top-px h-4 w-4 border-r-2 border-t-2 border-accent" />
-              <span aria-hidden className="absolute -bottom-px -left-px h-4 w-4 border-b-2 border-l-2 border-accent" />
-              <span aria-hidden className="absolute -bottom-px -right-px h-4 w-4 border-b-2 border-r-2 border-accent" />
-
-              <div className="bg-grid" aria-hidden>
-                <AvatarMark />
-              </div>
-
-              <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                  fig. 01 — the engineer
-                </span>
-                <span className="tnum font-mono text-[10px] text-muted/60">
-                  {site.location.split(",")[0].toUpperCase()} / EG
-                </span>
-              </div>
-            </div>
-          </motion.div>
+        <motion.div {...fadeUp(0.25)}>
+          <Avatar />
         </motion.div>
       </div>
+
+      {/* the engineering chain — hero signature motif */}
+      <motion.div
+        {...fadeUp(0.55)}
+        className="relative mx-auto max-w-3xl px-5 pb-14 sm:px-8"
+      >
+        <PipelineFlow className="opacity-70" />
+      </motion.div>
     </section>
   );
 }

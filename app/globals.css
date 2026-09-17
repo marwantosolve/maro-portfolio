@@ -62,6 +62,8 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    /* guard: no horizontal scroll from background visuals */
+    overflow-x: clip;
   }
 
   ::selection {
@@ -86,14 +88,6 @@
 }
 
 @layer utilities {
-  /* technical blueprint grid used behind hero + section canvases */
-  .bg-grid {
-    background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 44px 44px;
-  }
-
   .tnum {
     font-variant-numeric: tabular-nums;
   }

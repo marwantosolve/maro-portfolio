@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 import type { SubstackPost } from "@/lib/substack";
 import { cn } from "@/lib/utils";
 
@@ -10,12 +10,7 @@ function formatDate(iso: string): string {
   });
 }
 
-type WritingCardProps = {
-  post: SubstackPost;
-  featured?: boolean;
-};
-
-export function WritingCard({ post, featured = false }: WritingCardProps) {
+export function WritingCard({ post, featured = false }: { post: SubstackPost; featured?: boolean }) {
   return (
     <a
       href={post.url}
@@ -43,9 +38,24 @@ export function WritingCard({ post, featured = false }: WritingCardProps) {
       )}
 
       <div className={cn("flex flex-1 flex-col p-6", featured && "justify-center p-8")}>
-        <p className="tnum font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-          {formatDate(post.publishedAt)}
-        </p>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+          <p className="tnum font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+            {formatDate(post.publishedAt)}
+          </p>
+          {post.categories.slice(0, 2).map((category) => (
+            <span
+              key={category}
+              className="rounded-sm border border-border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-muted"
+            >
+              {category}
+            </span>
+          ))}
+          <span className="inline-flex items-center gap-1 font-mono text-[10px] text-muted/70">
+            <Clock size={10} />
+            <span className="tnum">{post.readingTime} min</span>
+          </span>
+        </div>
+
         <h3
           className={cn(
             "mt-3 font-display font-semibold leading-snug tracking-tight",
@@ -57,6 +67,7 @@ export function WritingCard({ post, featured = false }: WritingCardProps) {
         {post.excerpt && (
           <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{post.excerpt}</p>
         )}
+
         <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-accent-text">
           Read on Substack
           <ArrowUpRight

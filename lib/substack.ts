@@ -4,14 +4,28 @@ export type SubstackPost = {
   publishedAt: string; // ISO date
   excerpt: string;
   image?: string;
+  categories: string[];
+  readingTime: number; // minutes, computed from the article body
 };
 
 const FEED_URL = "https://marwantosolve.substack.com/feed";
+const WORDS_PER_MINUTE = 200;
 
 function extract(pattern: RegExp, source: string): string | undefined {
   const match = source.match(pattern);
   if (!match) return undefined;
   return match[1].trim();
+}
+
+function extractAll(pattern: RegExp, source: string): string[] {
+  const out: string[] = [];
+  const global = new RegExp(pattern.source, pattern.flags.includes("g") ? pattern.flags : pattern.flags + "g");
+  let match: RegExpExecArray | null;
+  while ((match = global.exec(source)) !== null) {
+    const value = match[1].trim();
+    if (value) out.push(value);
+  }
+  return out;
 }
 
 function stripHtml(html: string): string {
@@ -63,12 +77,21 @@ export async function getSubstackPosts(
 
       const excerpt = stripHtml(rawDescription).slice(0, 180).trim();
 
+      const categories = extractAll(/<category>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/category>/, item)
+        .map((c) => c.replace(/\s+/g, " "))
+        .filter((c) => c.length > 0 && c.length < 30);
+
+      const wordCount = stripHtml(content).split(" ").filter(Boolean).length;
+      const readingTime = Math.max(1, Math.round(wordCount / WORDS_PER_MINUTE));
+
       posts.push({
         title,
         url,
         publishedAt: new Date(pubDate).toISOString(),
-        excerpt: excerpt ? (excerpt + (excerpt.length >= 180 ? "…" : "")) : "",
+        excerpt: excerpt ? excerpt + (excerpt.length >= 180 ? "…" : "") : "",
         image,
+        categories,
+        readingTime,
       });
       if (posts.length >= limit) break;
     }

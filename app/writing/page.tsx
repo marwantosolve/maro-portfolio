@@ -50,19 +50,29 @@ export default async function WritingPage() {
       )}
 
       <Reveal delay={0.1}>
-        <a
-          href={site.urls.substack}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group mt-12 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:border-accent-text/60 hover:text-foreground"
-        >
-          Read more on Substack
-          <ArrowRight
-            size={14}
-            strokeWidth={1.75}
-            className="transition-transform duration-200 group-hover:translate-x-1"
-          />
-        </a>
+        <div className="mt-12 flex flex-wrap items-center gap-4">
+          <a
+            href={site.urls.substack}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:border-accent-text/60 hover:text-foreground"
+          >
+            Read more on Substack
+            <ArrowRight
+              size={14}
+              strokeWidth={1.75}
+              className="transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </a>
+          <a
+            href="https://substack.com/@marwantosolve"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent-ink transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            Subscribe
+          </a>
+        </div>
       </Reveal>
     </div>
   );

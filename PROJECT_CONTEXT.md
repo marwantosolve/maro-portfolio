@@ -29,6 +29,8 @@ The site must:
 
 ## 3. Positioning
 
+> **v2 direction (2026-09-14):** breadth, not evaluation-only. Evaluation is one strength, not the identity. Core positioning: *"an AI / LLM Engineer who can research, build, adapt, integrate, and evaluate intelligent systems."* Site messaging: **"AI systems that reason, retrieve, adapt, and act."** Project hierarchy: MASEF (flagship) · Atlas / Handelny / ForgeLM (major) · VisionTrack (additional). Capabilities framed as verbs: Build · Reason · Retrieve · Adapt · Evaluate. Visual system: sparse neural-network topology (replaces square grid); real tech identity via Simple Icons, clustered and muted. Avatar: v2 stylized vector character (curly top, faded sides, glasses) with a documented drop-in slot for the final 3D asset in `components/home/AvatarAsset.tsx`.
+
 One line (from the CV summary, to be refined with Marwan):
 
 > AI-focused Computer Science graduate specializing in LLMs, Agentic AI systems, and Generative AI — taking AI systems from research concepts to production-ready implementations.

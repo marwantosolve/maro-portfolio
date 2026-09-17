@@ -20,7 +20,7 @@ export function Footer() {
             marwan<span className="text-accent-text">.</span>
           </Link>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-            AI / LLM Engineer — building systems that are measurable.
+            AI systems that reason, retrieve, adapt, and act.
           </p>
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
             {site.location}

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { GithubIcon } from "@/components/ui/BrandIcons";
 import { Reveal } from "@/components/motion/Reveal";
 import { ArchitectureGraph } from "@/components/viz/ArchitectureGraph";
+import { TechChip } from "@/components/ui/TechIcon";
+import { GithubIcon } from "@/components/ui/BrandIcons";
 import { getProject, projects } from "@/content/projects";
 
 type Params = { slug: string };
@@ -87,23 +88,23 @@ export default async function CaseStudyPage({
         </div>
       </Reveal>
 
-      {/* the question */}
+      {/* the project's narrative frame — problem / system / study / benchmark */}
       <Reveal className="mt-16">
         <blockquote className="border-l-2 border-accent pl-6 sm:pl-8">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-            The question
+            {project.frame.label}
           </p>
           <p className="mt-4 max-w-3xl font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
-            {project.question}
+            {project.frame.statement}
           </p>
         </blockquote>
       </Reveal>
 
       {/* overview */}
       <Reveal className="mt-16">
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+        <h2 className="font-mono text-[10px] font-normal uppercase tracking-[0.18em] text-muted">
           Overview
-        </p>
+        </h2>
         <div className="mt-5 max-w-3xl space-y-5">
           {project.summary.map((paragraph, i) => (
             <p key={i} className="text-base leading-relaxed text-muted sm:text-lg">
@@ -116,9 +117,9 @@ export default async function CaseStudyPage({
       {/* architecture */}
       <Reveal className="mt-16">
         <div className="flex items-baseline justify-between">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+          <h2 className="font-mono text-[10px] font-normal uppercase tracking-[0.18em] text-muted">
             Architecture
-          </p>
+          </h2>
           <span className="font-mono text-[10px] text-muted/60">fig. {project.slug}</span>
         </div>
         <div className="mt-5 border border-border bg-surface/50 p-6 sm:p-8">
@@ -128,9 +129,9 @@ export default async function CaseStudyPage({
 
       {/* highlights */}
       <Reveal className="mt-16">
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+        <h2 className="font-mono text-[10px] font-normal uppercase tracking-[0.18em] text-muted">
           What it does
-        </p>
+        </h2>
         <ul className="mt-6 max-w-3xl">
           {project.highlights.map((highlight, i) => (
             <li key={i} className="flex gap-5 border-t border-border py-4 last:border-b">
@@ -143,16 +144,15 @@ export default async function CaseStudyPage({
         </ul>
       </Reveal>
 
-      {/* stack */}
+      {/* stack — real tech identity where icons exist */}
       <Reveal className="mt-16">
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">Stack</p>
+        <h2 className="font-mono text-[10px] font-normal uppercase tracking-[0.18em] text-muted">
+          Stack
+        </h2>
         <ul className="mt-5 flex max-w-3xl flex-wrap gap-2">
           {project.stack.map((item) => (
-            <li
-              key={item}
-              className="rounded-sm border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted"
-            >
-              {item}
+            <li key={item}>
+              <TechChip name={item} />
             </li>
           ))}
         </ul>

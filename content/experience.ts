@@ -74,58 +74,70 @@ export const languages = [
   { language: "English", level: "Advanced" },
 ] as const;
 
+/*
+  Capabilities — framed around verbs (build / reason / retrieve / adapt /
+  evaluate), not a tool catalog. Technologies beneath each capability are
+  supporting evidence, all CV-backed. Icons render automatically where a
+  real logo exists (see components/ui/TechIcon.tsx).
+*/
+
 export const capabilities = [
   {
-    title: "LLMs & Model Adaptation",
-    blurb: "Adapting and serving language models efficiently.",
-    items: [
-      "Fine-Tuning",
-      "LoRA / QLoRA (PEFT)",
-      "Quantization",
-      "Instruction Following",
-      "vLLM",
-      "Hugging Face Transformers",
-      "PyTorch",
-    ],
+    verb: "Build",
+    title: "Production-oriented AI systems",
+    blurb: "From research prototype to deployed system — APIs, pipelines, and infrastructure that hold up in production.",
+    items: ["FastAPI", "Docker", "PostgreSQL", "Redis", "Linux", "Kubernetes", "CI/CD"],
   },
   {
-    title: "Agentic & Multi-Agent Systems",
-    blurb: "Agents that act, call tools, and cooperate.",
-    items: [
-      "LangChain",
-      "LangGraph",
-      "LlamaIndex",
-      "Tool Calling",
-      "MCP",
-      "A2A",
-      "Prompt Engineering",
-      "Context Engineering",
-    ],
+    verb: "Reason",
+    title: "LLMs, agents, and orchestration",
+    blurb: "Agents that plan, call tools, and cooperate — orchestrated as reliable systems.",
+    items: ["LangGraph", "LangChain", "LlamaIndex", "Tool Calling", "MCP", "A2A", "Prompt Engineering", "Context Engineering"],
   },
   {
-    title: "RAG & Knowledge Systems",
-    blurb: "Grounded answers from real documents.",
-    items: [
-      "FAISS",
-      "Qdrant",
-      "ChromaDB",
-      "Hybrid Search",
-      "Reranking",
-      "Knowledge Graphs",
-      "GraphRAG",
-      "BM25",
-    ],
+    verb: "Retrieve",
+    title: "RAG and knowledge systems",
+    blurb: "Grounded answers from real documents, with citations instead of guesses.",
+    items: ["Qdrant", "FAISS", "ChromaDB", "Hybrid Search", "Reranking", "GraphRAG", "BM25", "Knowledge Graphs"],
   },
   {
-    title: "AI Evaluation & Observability",
-    blurb: "Systems you can measure, trust, and debug.",
-    items: [
-      "LLM-as-Judge",
-      "Benchmarking",
-      "AI Observability",
-      "OpenTelemetry",
-      "Prometheus",
-      "Grafana",
-    ],
+    verb: "Adapt",
+    title: "Fine-tuning and efficient model adaptation",
+    blurb: "Making pretrained models better at the task that matters — without wasting compute.",
+    items: ["PyTorch", "Hugging Face", "vLLM", "PEFT", "LoRA / QLoRA", "Quantization"],
+  },
+  {
+    verb: "Evaluate",
+    title: "Reliable benchmarking and AI evaluation",
+    blurb: "Systems you can measure, trust, and debug — evaluation as a first-class engineering concern.",
+    items: ["LLM-as-Judge", "Benchmarking", "Evaluation Pipelines", "OpenTelemetry", "Prometheus", "Grafana"],
+  },
+] as const;
+
+/*
+  Technology clusters — the toolbox view used on About. Same CV-backed
+  set as capabilities, grouped for scanning.
+*/
+
+export const techClusters = [
+  {
+    title: "LLM / Model Engineering",
+    items: ["PyTorch", "Hugging Face", "vLLM", "TensorFlow", "PEFT", "LoRA / QLoRA", "Quantization"],
+  },
+  {
+    title: "Agentic Systems",
+    items: ["LangGraph", "LangChain", "LlamaIndex", "Tool Calling", "MCP", "A2A"],
+  },
+  {
+    title: "Retrieval / Knowledge",
+    items: ["Qdrant", "FAISS", "ChromaDB", "BM25", "Hybrid Search", "Reranking", "Knowledge Graphs", "GraphRAG"],
+  },
+  {
+    title: "Systems",
+    items: ["FastAPI", "PostgreSQL", "Redis", "Docker", "Linux", "Kubernetes"],
+  },
+  {
+    title: "Observability",
+    items: ["OpenTelemetry", "Prometheus", "Grafana"],
   },
 ] as const;
