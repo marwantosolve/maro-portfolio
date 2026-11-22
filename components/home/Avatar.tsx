@@ -1,13 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import AvatarAsset from "./AvatarAsset";
+import { Portrait } from "./Portrait";
 
 /*
-  Avatar — presentational wrapper for the hero character.
-  Owns the frame, idle motion, and caption. Renders <AvatarAsset />,
-  which is the single drop-in point for the final generated 3D
-  character (see AvatarAsset.tsx header for the contract).
+  Avatar — presentational wrapper for the hero visual.
+  Owns the frame, idle motion, and caption. Renders <Portrait />,
+  the single drop-in point for the hero image (monogram or photo —
+  see content/portfolio.config.ts).
 */
 
 export function Avatar() {
@@ -28,7 +28,7 @@ export function Avatar() {
           <span aria-hidden className="absolute -bottom-px -left-px h-4 w-4 border-b-2 border-l-2 border-accent" />
           <span aria-hidden className="absolute -bottom-px -right-px h-4 w-4 border-b-2 border-r-2 border-accent" />
 
-          <AvatarAsset />
+          <Portrait />
 
           <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
