@@ -13,7 +13,14 @@
      To change the picture, replace the file in public/ (keep the
      name) and commit. To change the mode, edit one line below.
 
-  2) GITHUB PROJECTS ("More from GitHub" section on /work)
+  2) FEATURED PROJECTS (the big cards on the homepage and /work)
+     - One line per project, in the order you want them shown.
+     - show: false hides the card everywhere; the project's
+       /work/<slug> page stays reachable by direct link.
+     - The full write-up of each project lives in content/projects.ts.
+       Featuring a NEW project = add its content there, then one line here.
+
+  3) GITHUB PROJECTS ("More from GitHub" section on /work)
      The section is built LIVE from your public GitHub repos.
      Nothing appears unless you allow it here:
      - Each repo below has  show: true | false.
@@ -35,6 +42,14 @@ export const portfolioConfig = {
     photoSrc: "/portrait.jpg",
     alt: "Portrait of Marwan Osama",
   },
+
+  projects: [
+    { slug: "masef", show: true },
+    { slug: "atlas", show: true },
+    { slug: "handelny", show: true },
+    { slug: "forgelm", show: true },
+    { slug: "visiontrack", show: true },
+  ],
 
   github: {
     username: "marwantosolve",
