@@ -11,6 +11,8 @@
   benchmark) — not every story is a question about measurement.
 */
 
+import { portfolioConfig } from "./portfolio.config";
+
 export type ProjectTier = "flagship" | "major" | "additional";
 
 export type GraphNodeKind = "source" | "step" | "store" | "output";
@@ -291,6 +293,28 @@ export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
 
-export const flagship = projects.filter((p) => p.tier === "flagship");
-export const majorWork = projects.filter((p) => p.tier === "major");
-export const additionalWork = projects.filter((p) => p.tier === "additional");
+/*
+  Visibility and order of the big cards are controlled in
+  content/portfolio.config.ts (the `projects` list). A slug missing
+  from that list is treated as hidden.
+*/
+const cardControl = new Map<string, { show: boolean; index: number }>(
+  portfolioConfig.projects.map((entry, index) => [
+    entry.slug as string,
+    { show: entry.show, index },
+  ]),
+);
+
+function curate(list: Project[]): Project[] {
+  return list
+    .filter((p) => cardControl.get(p.slug)?.show ?? false)
+    .sort(
+      (a, b) =>
+        (cardControl.get(a.slug)?.index ?? 0) - (cardControl.get(b.slug)?.index ?? 0),
+    );
+}
+
+export const visibleProjects = curate(projects);
+export const flagship = curate(projects.filter((p) => p.tier === "flagship"));
+export const majorWork = curate(projects.filter((p) => p.tier === "major"));
+export const additionalWork = curate(projects.filter((p) => p.tier === "additional"));
