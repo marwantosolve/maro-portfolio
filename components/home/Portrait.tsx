@@ -1,18 +1,27 @@
 import { portfolioConfig } from "@/content/portfolio.config";
+import PortraitCharacter from "@/components/home/PortraitCharacter";
 
 /*
   Portrait — the hero's visual.
 
-  Three modes, controlled from content/portfolio.config.ts:
-    "avatar"   — the illustrated portrait at public/avatar.jpg
-    "photo"    — Marwan's real photo at public/portrait.jpg
-    "monogram" — a clean typographic mark (no image)
-
-  Server component: no client JS, no tracking, instant paint.
+  Four modes, controlled from content/portfolio.config.ts:
+    "character" — the interactive cartoon: follows the cursor,
+                  blinks, breathes; still under reduced motion
+    "avatar"    — the illustrated portrait at public/avatar.jpg
+    "photo"     — Marwan's real photo at public/portrait.jpg
+    "monogram"  — a clean typographic mark (no image)
 */
 
 export function Portrait() {
   const { portrait } = portfolioConfig;
+
+  if (portrait.mode === "character") {
+    return (
+      <div className="relative aspect-[360/400] w-full overflow-hidden bg-surface-2">
+        <PortraitCharacter />
+      </div>
+    );
+  }
 
   if (portrait.mode !== "monogram") {
     const src = portrait.mode === "avatar" ? portrait.avatarSrc : portrait.photoSrc;
