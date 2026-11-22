@@ -1,7 +1,26 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import type { Project } from "@/content/projects";
+import { formatMonthYear, type RepoStats } from "@/lib/github";
 import { cn } from "@/lib/utils";
+
+/* live GitHub metadata chip — stars, language, last update */
+function RepoMeta({ stats }: { stats: RepoStats }) {
+  return (
+    <span className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted/70">
+      <span className="flex items-center gap-1">
+        <Star size={11} strokeWidth={1.75} aria-hidden />
+        <span className="tnum">{stats.stars}</span>
+      </span>
+      {stats.language && <span>{stats.language}</span>}
+      {stats.updatedAt && (
+        <span className="tnum normal-case tracking-[0.08em]">
+          updated {formatMonthYear(stats.updatedAt)}
+        </span>
+      )}
+    </span>
+  );
+}
 
 /*
   Project cards — hierarchy-aware.
@@ -71,7 +90,15 @@ export function FlagshipCard({ project }: { project: Project }) {
   );
 }
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({
+  project,
+  index,
+  stats,
+}: {
+  project: Project;
+  index: number;
+  stats?: RepoStats;
+}) {
   return (
     <Link
       href={`/work/${project.slug}`}
@@ -103,6 +130,8 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           </div>
           <p className="mt-1.5 text-sm text-muted sm:text-[15px]">{project.tagline}</p>
 
+          {stats && <div className="mt-2.5"><RepoMeta stats={stats} /></div>}
+
           {/* narrative frame — always readable on touch, revealed on hover/focus from sm up */}
           <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-400 ease-out sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr] sm:group-focus-visible:grid-rows-[1fr]">
             <div className="overflow-hidden">
@@ -126,7 +155,13 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   );
 }
 
-export function CompactCard({ project }: { project: Project }) {
+export function CompactCard({
+  project,
+  stats,
+}: {
+  project: Project;
+  stats?: RepoStats;
+}) {
   return (
     <Link
       href={`/work/${project.slug}`}
@@ -139,6 +174,7 @@ export function CompactCard({ project }: { project: Project }) {
         <span className="text-sm text-muted">{project.tagline}</span>
       </div>
       <span className="flex shrink-0 items-center gap-3">
+        {stats && <RepoMeta stats={stats} />}
         <span className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-muted sm:inline">
           {project.domain}
         </span>
