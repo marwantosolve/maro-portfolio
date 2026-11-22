@@ -13,9 +13,10 @@ import {
   ─────────────────────────────────────────────────────────────────
   PORTRAIT CHARACTER — interactive cartoon Marwan
   ─────────────────────────────────────────────────────────────────
-  Drawn from his portrait photo: dense dark curls all around, thin
-  round silver glasses, thick straight brows, light stubble, black
-  polo with collar.
+  Drawn from his portrait photo: dense dark curls hugging the skull
+  with a ringlet fringe over the forehead, long oval face, silver-
+  green eyes, thin round silver glasses, thick straight brows,
+  light stubble, black polo. Soft gradient shading for a 3D feel.
 
   Behavior:
   - Head, pupils and torso follow the cursor (springs, bounded).
@@ -26,16 +27,16 @@ import {
   ─────────────────────────────────────────────────────────────────
 */
 
-const SKIN = "#dfa87e";
+const SKIN = "#e0aa7d";
 const SKIN_SHADE = "#cb9066";
-const SKIN_DEEP = "#b87c54";
-const HAIR = "#1e1a17";
-const HAIR_HI = "#332d28";
-const CURL_HI = "#4a423b";
-const INK = "#15161a";
-const FRAME = "#c3c8d0";
-const POLO = "#11141a";
-const POLO_HI = "#1e232d";
+const SKIN_DEEP = "#b07a50";
+const HAIR = "#221d18";
+const HAIR_DARK = "#171310";
+const CURL_HI = "#4d443b";
+const INK = "#17181c";
+const FRAME = "#c9ced6";
+const POLO = "#12151b";
+const POLO_HI = "#232936";
 
 export default function PortraitCharacter() {
   const reduce = useReducedMotion();
@@ -111,6 +112,10 @@ export default function PortraitCharacter() {
         },
       };
 
+  // face silhouette (long oval, defined jaw) reused for shading + clipping
+  const FACE =
+    "M124 148 C124 108 148 92 180 92 C212 92 236 108 236 148 C236 184 230 216 212 242 C202 256 191 263 180 265 C169 263 158 256 148 242 C130 216 124 184 124 148 Z";
+
   return (
     <svg
       viewBox="0 0 360 400"
@@ -119,159 +124,217 @@ export default function PortraitCharacter() {
       aria-label="Animated cartoon portrait of Marwan Osama"
     >
       <defs>
-        <radialGradient id="pc-cheekL" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%" stopColor={SKIN_SHADE} stopOpacity="0.35" />
+        {/* 3D skin shading: lit center, shaded edges */}
+        <radialGradient id="pc-skin" cx="0.5" cy="0.42" r="0.75">
+          <stop offset="0%" stopColor="#eec194" />
+          <stop offset="55%" stopColor={SKIN} />
+          <stop offset="100%" stopColor="#cd9268" />
+        </radialGradient>
+        {/* hair volume: lighter crown, dark base */}
+        <radialGradient id="pc-hair" cx="0.42" cy="0.28" r="0.9">
+          <stop offset="0%" stopColor="#463d34" />
+          <stop offset="45%" stopColor="#2c2620" />
+          <stop offset="100%" stopColor={HAIR_DARK} />
+        </radialGradient>
+        {/* silver-green iris */}
+        <radialGradient id="pc-iris" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#a8bfa8" />
+          <stop offset="55%" stopColor="#7d9c83" />
+          <stop offset="100%" stopColor="#52705c" />
+        </radialGradient>
+        <linearGradient id="pc-polo" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={POLO_HI} />
+          <stop offset="35%" stopColor={POLO} />
+          <stop offset="100%" stopColor="#0b0e13" />
+        </linearGradient>
+        <radialGradient id="pc-cheek" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor={SKIN_SHADE} stopOpacity="0.4" />
           <stop offset="100%" stopColor={SKIN_SHADE} stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="pc-cheekR" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%" stopColor={SKIN_SHADE} stopOpacity="0.35" />
-          <stop offset="100%" stopColor={SKIN_SHADE} stopOpacity="0" />
-        </radialGradient>
+        <filter id="pc-soft" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" />
+        </filter>
+        <filter id="pc-softer" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="6" />
+        </filter>
         <clipPath id="pc-face">
-          <path d="M118 155 C118 112 146 92 180 92 C214 92 242 112 242 155 C242 205 226 248 180 266 C134 248 118 205 118 155 Z" />
+          <path d={FACE} />
         </clipPath>
       </defs>
 
       {/* torso: black polo — follows gently, breathes */}
       <motion.g {...torsoMotion}>
-        <path d="M70 400 C70 328 112 296 180 296 C248 296 290 328 290 400 Z" fill={POLO} />
+        <path d="M64 400 C64 326 110 294 180 294 C250 294 296 326 296 400 Z" fill="url(#pc-polo)" />
+        {/* shoulder shading */}
+        <path d="M64 400 C64 326 110 294 180 294 L180 400 Z" fill="#ffffff" opacity="0.03" />
         {/* polo collar */}
-        <path d="M150 297 L180 318 L163 330 L146 304 Z" fill={POLO_HI} />
-        <path d="M210 297 L180 318 L197 330 L214 304 Z" fill={POLO_HI} />
-        <path d="M180 318 L180 348" stroke={POLO_HI} strokeWidth="3" strokeLinecap="round" />
-        <circle cx="180" cy="338" r="2.2" fill={POLO_HI} />
-        <path d="M96 324 C104 315 114 309 126 305" fill="none" stroke={POLO_HI} strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M264 324 C256 315 246 309 234 305" fill="none" stroke={POLO_HI} strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M149 295 L180 317 L162 330 L144 302 Z" fill={POLO_HI} />
+        <path d="M211 295 L180 317 L198 330 L216 302 Z" fill={POLO_HI} />
+        <path d="M149 295 L180 317 L162 330" fill="none" stroke="#2e3542" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
+        <path d="M211 295 L180 317 L198 330" fill="none" stroke="#2e3542" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
+        <path d="M180 317 L180 352" stroke="#0b0e13" strokeWidth="4" strokeLinecap="round" />
+        <circle cx="180" cy="334" r="2.4" fill="#2e3542" />
+        <circle cx="180" cy="346" r="2.4" fill="#2e3542" />
       </motion.g>
 
-      {/* neck */}
-      <path d="M158 244 L158 292 C158 300 202 300 202 292 L202 244 Z" fill={SKIN_SHADE} />
-      <path d="M158 244 C166 260 194 260 202 244 L202 256 C194 268 166 268 158 256 Z" fill={SKIN_DEEP} opacity="0.45" />
+      {/* neck + shadow cast by the chin */}
+      <path d="M158 240 L158 292 C158 301 202 301 202 292 L202 240 Z" fill={SKIN_SHADE} />
+      <ellipse cx="180" cy="252" rx="24" ry="9" fill={SKIN_DEEP} opacity="0.55" filter="url(#pc-soft)" />
 
       {/* head — tilts toward the cursor */}
       <motion.g {...headMotion}>
         {/* ears */}
-        <ellipse cx="116" cy="176" rx="9" ry="14" fill={SKIN} />
-        <ellipse cx="244" cy="176" rx="9" ry="14" fill={SKIN} />
-        <ellipse cx="116" cy="176" rx="4" ry="7" fill={SKIN_SHADE} opacity="0.7" />
-        <ellipse cx="244" cy="176" rx="4" ry="7" fill={SKIN_SHADE} opacity="0.7" />
+        <ellipse cx="122" cy="180" rx="9" ry="14" fill="url(#pc-skin)" />
+        <ellipse cx="238" cy="180" rx="9" ry="14" fill="url(#pc-skin)" />
+        <ellipse cx="122" cy="180" rx="4" ry="7" fill={SKIN_SHADE} opacity="0.7" />
+        <ellipse cx="238" cy="180" rx="4" ry="7" fill={SKIN_SHADE} opacity="0.7" />
 
-        {/* face */}
-        <path
-          d="M118 155 C118 112 146 92 180 92 C214 92 242 112 242 155 C242 205 226 248 180 266 C134 248 118 205 118 155 Z"
-          fill={SKIN}
-        />
-        <ellipse cx="136" cy="198" rx="16" ry="22" fill="url(#pc-cheekL)" />
-        <ellipse cx="224" cy="198" rx="16" ry="22" fill="url(#pc-cheekR)" />
+        {/* face with 3D gradient */}
+        <path d={FACE} fill="url(#pc-skin)" />
+        {/* soft inner shadow around the jaw/edges */}
+        <path d={FACE} fill="none" stroke={SKIN_DEEP} strokeWidth="9" opacity="0.28" filter="url(#pc-soft)" clipPath="url(#pc-face)" />
+        {/* forehead + nose-bridge highlight */}
+        <ellipse cx="180" cy="126" rx="34" ry="16" fill="#ffffff" opacity="0.14" filter="url(#pc-softer)" />
+        {/* cheekbone shading */}
+        <ellipse cx="140" cy="202" rx="15" ry="20" fill="url(#pc-cheek)" />
+        <ellipse cx="220" cy="202" rx="15" ry="20" fill="url(#pc-cheek)" />
 
-        {/* light stubble on the jaw and upper lip */}
+        {/* light stubble on jaw, chin and upper lip */}
         <g clipPath="url(#pc-face)">
           <path
-            d="M124 196 C132 236 152 258 180 266 C208 258 228 236 236 196 L236 266 L124 266 Z"
+            d="M128 198 C136 236 154 258 180 265 C206 258 224 236 232 198 L232 265 L128 265 Z"
             fill={SKIN_DEEP}
-            opacity="0.22"
+            opacity="0.2"
           />
-          <ellipse cx="180" cy="222" rx="15" ry="4" fill={SKIN_DEEP} opacity="0.16" />
+          <g fill={SKIN_DEEP} opacity="0.3">
+            <circle cx="150" cy="238" r="0.9" /><circle cx="158" cy="246" r="0.9" />
+            <circle cx="166" cy="252" r="0.9" /><circle cx="176" cy="256" r="0.9" />
+            <circle cx="186" cy="255" r="0.9" /><circle cx="196" cy="250" r="0.9" />
+            <circle cx="204" cy="243" r="0.9" /><circle cx="211" cy="235" r="0.9" />
+            <circle cx="143" cy="228" r="0.9" /><circle cx="217" cy="226" r="0.9" />
+            <circle cx="154" cy="230" r="0.9" /><circle cx="206" cy="232" r="0.9" />
+            <circle cx="170" cy="226" r="0.9" /><circle cx="190" cy="226" r="0.9" />
+          </g>
+          <ellipse cx="180" cy="221" rx="13" ry="3.4" fill={SKIN_DEEP} opacity="0.22" />
         </g>
 
-        {/* hair: dense curls all around */}
-        <g fill={HAIR}>
-          <circle cx="108" cy="122" r="17" />
-          <circle cx="108" cy="142" r="13" />
-          <circle cx="252" cy="122" r="17" />
-          <circle cx="252" cy="142" r="13" />
-          <circle cx="122" cy="96" r="19" />
-          <circle cx="146" cy="78" r="20" />
-          <circle cx="172" cy="68" r="21" />
-          <circle cx="198" cy="68" r="21" />
-          <circle cx="224" cy="78" r="20" />
-          <circle cx="242" cy="98" r="18" />
-          <circle cx="134" cy="86" r="14" />
-          <circle cx="160" cy="70" r="15" />
-          <circle cx="186" cy="66" r="15" />
-          <circle cx="212" cy="72" r="14" />
-          <circle cx="234" cy="88" r="14" />
-          <circle cx="114" cy="108" r="13" />
-          <circle cx="246" cy="110" r="13" />
-        </g>
-        {/* curl texture */}
-        <g fill="none" stroke={CURL_HI} strokeWidth="2" strokeLinecap="round" opacity="0.7">
-          <path d="M126 90 Q132 84 139 89" />
-          <path d="M150 74 Q157 68 164 74" />
-          <path d="M176 64 Q183 58 190 64" />
-          <path d="M202 66 Q209 60 216 67" />
-          <path d="M226 80 Q232 74 238 81" />
-          <path d="M114 112 Q120 106 126 111" />
-          <path d="M240 114 Q246 108 251 114" />
-          <path d="M140 82 Q146 77 152 82" />
-          <path d="M164 70 Q170 65 176 70" />
-          <path d="M190 62 Q196 57 202 63" />
-          <path d="M214 74 Q220 69 226 75" />
-          <path d="M108 140 Q113 135 118 140" />
-          <path d="M244 142 Q249 137 254 142" />
-        </g>
-        <path
-          d="M142 70 Q180 52 218 70"
-          fill="none"
-          stroke={HAIR_HI}
-          strokeWidth="3"
-          strokeLinecap="round"
-          opacity="0.8"
-        />
+        {/* nose: bridge highlight + shading */}
+        <path d="M180 186 C177 197 175 205 180 211" fill="none" stroke={SKIN_DEEP} strokeWidth="3" strokeLinecap="round" />
+        <path d="M182 188 C181 196 180 203 182 209" fill="none" stroke="#f4d3ae" strokeWidth="1.6" strokeLinecap="round" opacity="0.7" />
+        <path d="M171 211 Q175 214 179 213" fill="none" stroke={SKIN_DEEP} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+        <path d="M189 211 Q185 214 181 213" fill="none" stroke={SKIN_DEEP} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+
+        {/* mouth: closed, full lips, neutral */}
+        <path d="M165 231 Q180 236 195 231" fill="none" stroke="#9c5f43" strokeWidth="3.2" strokeLinecap="round" />
+        <path d="M168 236 Q180 241 192 236 Q180 244 168 236 Z" fill="#b0705a" opacity="0.55" />
 
         {/* thick straight brows */}
-        <path d="M132 158 C142 152 158 152 166 157" fill="none" stroke={HAIR} strokeWidth="5" strokeLinecap="round" />
-        <path d="M194 157 C202 152 218 152 228 158" fill="none" stroke={HAIR} strokeWidth="5" strokeLinecap="round" />
+        <path d="M133 158 C143 153 158 153 166 157" fill="none" stroke={HAIR_DARK} strokeWidth="5.4" strokeLinecap="round" />
+        <path d="M194 157 C202 153 217 153 227 158" fill="none" stroke={HAIR_DARK} strokeWidth="5.4" strokeLinecap="round" />
 
-        {/* eyes: whites, tracking pupils, blinking lids */}
-        <ellipse cx="153" cy="183" rx="10" ry="5.6" fill="#f5f1ec" opacity="0.9" />
-        <ellipse cx="207" cy="183" rx="10" ry="5.6" fill="#f5f1ec" opacity="0.9" />
+        {/* almond eyes: whites, silver-green tracking irises, blinking lids */}
+        <path d="M142 184 Q153 176 164 184 Q153 191 142 184 Z" fill="#f7f3ee" />
+        <path d="M196 184 Q207 176 218 184 Q207 191 196 184 Z" fill="#f7f3ee" />
         <motion.g {...eyeMotion}>
-          <circle cx="153" cy="184" r="4.2" fill={INK} />
-          <circle cx="207" cy="184" r="4.2" fill={INK} />
-          <circle cx="154.4" cy="182.6" r="1.1" fill="#ffffff" opacity="0.85" />
-          <circle cx="208.4" cy="182.6" r="1.1" fill="#ffffff" opacity="0.85" />
+          <circle cx="153" cy="184" r="5.2" fill="url(#pc-iris)" />
+          <circle cx="207" cy="184" r="5.2" fill="url(#pc-iris)" />
+          <circle cx="153" cy="184" r="2.3" fill={INK} />
+          <circle cx="207" cy="184" r="2.3" fill={INK} />
+          <circle cx="154.6" cy="182.4" r="1.2" fill="#ffffff" opacity="0.9" />
+          <circle cx="208.6" cy="182.4" r="1.2" fill="#ffffff" opacity="0.9" />
         </motion.g>
+        {/* upper lash lines */}
+        <path d="M142 184 Q153 175.4 164 184" fill="none" stroke="#241c14" strokeWidth="2" strokeLinecap="round" />
+        <path d="M196 184 Q207 175.4 218 184" fill="none" stroke="#241c14" strokeWidth="2" strokeLinecap="round" />
         {/* blink lids */}
         <motion.ellipse
           cx="153"
-          cy="183"
-          rx="12"
-          ry="8"
+          cy="184"
+          rx="13"
+          ry="9"
           fill={SKIN}
-          style={{ scaleY: 0, originX: "153px", originY: "183px" }}
+          style={{ scaleY: 0, originX: "153px", originY: "184px" }}
           {...lidMotion}
         />
         <motion.ellipse
           cx="207"
-          cy="183"
-          rx="12"
-          ry="8"
+          cy="184"
+          rx="13"
+          ry="9"
           fill={SKIN}
-          style={{ scaleY: 0, originX: "207px", originY: "183px" }}
+          style={{ scaleY: 0, originX: "207px", originY: "184px" }}
           {...lidMotion}
         />
-        <path d="M143 180 Q153 175 163 180" fill="none" stroke={SKIN_DEEP} strokeWidth="1.6" strokeLinecap="round" opacity="0.6" />
-        <path d="M197 180 Q207 175 217 180" fill="none" stroke={SKIN_DEEP} strokeWidth="1.6" strokeLinecap="round" opacity="0.6" />
 
-        {/* thin round silver glasses */}
-        <g stroke={FRAME} strokeWidth="2.4" fill="#ffffff" fillOpacity="0.04">
-          <circle cx="153" cy="183" r="17" />
-          <circle cx="207" cy="183" r="17" />
+        {/* thin round silver glasses + lens sheen */}
+        <g stroke={FRAME} strokeWidth="2.3" fill="#ffffff" fillOpacity="0.05">
+          <circle cx="153" cy="184" r="17.5" />
+          <circle cx="207" cy="184" r="17.5" />
         </g>
-        <path d="M170 180 Q180 174 190 180" fill="none" stroke={FRAME} strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M136 181 L117 177" fill="none" stroke={FRAME} strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M224 181 L243 177" fill="none" stroke={FRAME} strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M144 174 A17 17 0 0 1 158 168" fill="none" stroke="#ffffff" strokeWidth="1.6" strokeLinecap="round" opacity="0.5" />
+        <path d="M170.5 181 Q180 175 189.5 181" fill="none" stroke={FRAME} strokeWidth="2.3" strokeLinecap="round" />
+        <path d="M135.8 182 L121 178" fill="none" stroke={FRAME} strokeWidth="2.3" strokeLinecap="round" />
+        <path d="M224.2 182 L239 178" fill="none" stroke={FRAME} strokeWidth="2.3" strokeLinecap="round" />
+        <path d="M145 175 A17.5 17.5 0 0 1 159 169" fill="none" stroke="#ffffff" strokeWidth="1.7" strokeLinecap="round" opacity="0.55" />
+        <path d="M199 175 A17.5 17.5 0 0 1 213 169" fill="none" stroke="#ffffff" strokeWidth="1.7" strokeLinecap="round" opacity="0.55" />
 
-        {/* nose */}
-        <path d="M180 190 C177 199 175 205 180 210" fill="none" stroke={SKIN_DEEP} strokeWidth="3" strokeLinecap="round" />
-        <path d="M172 210 Q175 213 179 212" fill="none" stroke={SKIN_DEEP} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-        <path d="M188 210 Q185 213 181 212" fill="none" stroke={SKIN_DEEP} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-
-        {/* mouth — slight confident smile */}
-        <path d="M164 232 Q180 238 196 232" fill="none" stroke="#96593d" strokeWidth="3.4" strokeLinecap="round" />
-        <path d="M169 236 Q180 240 191 236" fill="none" stroke={SKIN_DEEP} strokeWidth="1.6" strokeLinecap="round" opacity="0.35" />
+        {/* hair: one solid mass hugging the skull, ringlet fringe on the forehead */}
+        <path
+          d="M118 158
+             C108 148 104 128 110 106
+             C116 70 146 50 180 50
+             C214 50 244 70 250 106
+             C256 128 252 148 242 158
+             C240 142 238 130 232 120
+             C234 108 230 100 222 98
+             C224 108 218 114 210 112
+             C212 102 206 96 197 97
+             C199 107 193 113 185 111
+             C186 101 180 96 172 98
+             C172 108 166 113 158 111
+             C159 102 153 97 145 99
+             C147 109 141 115 133 112
+             C132 122 126 130 122 134
+             C120 142 119 150 118 158 Z"
+          fill="url(#pc-hair)"
+        />
+        {/* loose ringlets hanging from the fringe */}
+        <g fill="url(#pc-hair)">
+          <circle cx="134" cy="116" r="8" />
+          <circle cx="148" cy="112" r="7" />
+          <circle cx="162" cy="114" r="8" />
+          <circle cx="176" cy="110" r="7" />
+          <circle cx="190" cy="113" r="8" />
+          <circle cx="204" cy="110" r="7" />
+          <circle cx="218" cy="114" r="8" />
+          <circle cx="126" cy="128" r="7" />
+          <circle cx="232" cy="126" r="7" />
+        </g>
+        {/* curl texture */}
+        <g fill="none" stroke={CURL_HI} strokeWidth="2" strokeLinecap="round" opacity="0.75">
+          <path d="M130 100 Q136 94 143 99" />
+          <path d="M148 84 Q155 78 162 84" />
+          <path d="M170 72 Q177 66 184 72" />
+          <path d="M194 74 Q201 68 208 75" />
+          <path d="M216 88 Q222 82 228 89" />
+          <path d="M120 118 Q126 112 132 117" />
+          <path d="M228 116 Q234 110 240 116" />
+          <path d="M140 116 Q146 111 152 116" />
+          <path d="M160 106 Q166 101 172 106" />
+          <path d="M182 104 Q188 99 194 105" />
+          <path d="M204 108 Q210 103 216 109" />
+          <path d="M156 94 Q162 89 168 94" />
+          <path d="M186 90 Q192 85 198 91" />
+        </g>
+        {/* crown highlight */}
+        <path d="M140 66 Q180 48 220 66" fill="none" stroke="#5a5045" strokeWidth="4" strokeLinecap="round" opacity="0.55" filter="url(#pc-soft)" />
+        {/* soft shadow the fringe casts on the forehead */}
+        <path
+          d="M128 118 C144 108 162 112 180 110 C198 112 216 108 232 118 L232 128 C216 118 198 122 180 120 C162 122 144 118 128 128 Z"
+          fill="#000000"
+          opacity="0.14"
+          filter="url(#pc-soft)"
+          clipPath="url(#pc-face)"
+        />
       </motion.g>
     </svg>
   );
