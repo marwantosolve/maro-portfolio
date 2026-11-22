@@ -4,6 +4,8 @@
   ─────────────────────────────────────────────────────────────────
 
   1) PORTRAIT (hero image)
+     - mode "character": the interactive cartoon (follows the cursor,
+       blinks, breathes; completely still under reduced motion)
      - mode "avatar":   the illustrated portrait at public/avatar.jpg
      - mode "photo":    your real photo at public/portrait.jpg
      (not committed for privacy — drop the file in yourself to use it)
@@ -28,7 +30,7 @@
 
 export const portfolioConfig = {
   portrait: {
-    mode: "avatar" as "avatar" | "photo" | "monogram",
+    mode: "character" as "character" | "avatar" | "photo" | "monogram",
     avatarSrc: "/avatar.jpg",
     photoSrc: "/portrait.jpg",
     alt: "Portrait of Marwan Osama",
