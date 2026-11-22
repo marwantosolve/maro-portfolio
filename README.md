@@ -24,9 +24,10 @@ npm run build    # production build
 
 One file: [`content/portfolio.config.ts`](./content/portfolio.config.ts).
 
-- **Hero portrait** — `mode: "avatar"` (default: the illustrated portrait at
-  `public/avatar.jpg`), `"photo"`, or `"monogram"`. For a photo, drop the file
-  at `public/portrait.jpg` (not committed) and flip the mode.
+- **Hero portrait** — `mode: "character"` (default: the interactive cartoon
+  that follows the cursor, blinks, and breathes), `"avatar"` (the illustrated
+  portrait at `public/avatar.jpg`), `"photo"`, or `"monogram"`. For a photo,
+  drop the file at `public/portrait.jpg` (not committed) and flip the mode.
 - **GitHub projects** — the "More from GitHub" section is built live from the
   GitHub API (stars, language, activity, refreshed hourly). Each repo in the
   config has `show: true | false`; the list order is the display order. Add a
