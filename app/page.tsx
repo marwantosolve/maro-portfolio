@@ -4,15 +4,17 @@ import { Hero } from "@/components/home/Hero";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TechChip } from "@/components/ui/TechIcon";
-import { FlagshipCard, ProjectCard, CompactCard } from "@/components/work/ProjectCard";
+import { FlagshipCard, ProjectCard } from "@/components/work/ProjectCard";
 import { WritingCard } from "@/components/writing/WritingCard";
-import { flagship, majorWork, additionalWork } from "@/content/projects";
+import { flagship, majorWork } from "@/content/projects";
+import { getGitHubRepoMap, statsFor } from "@/lib/github";
 import { capabilities } from "@/content/experience";
 import { getSubstackPosts } from "@/lib/substack";
 import { site } from "@/lib/site";
 
 export default async function HomePage() {
   const posts = await getSubstackPosts(4);
+  const repoMap = await getGitHubRepoMap();
 
   return (
     <>
@@ -33,15 +35,11 @@ export default async function HomePage() {
           <div className="mt-12">
             {majorWork.map((project, i) => (
               <Reveal key={project.slug} delay={i * 0.06}>
-                <ProjectCard project={project} index={i + 1} />
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="mt-10">
-            {additionalWork.map((project) => (
-              <Reveal key={project.slug}>
-                <CompactCard project={project} />
+                <ProjectCard
+                  project={project}
+                  index={i + 1}
+                  stats={statsFor(repoMap, project.repo)}
+                />
               </Reveal>
             ))}
           </div>
