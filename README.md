@@ -28,6 +28,9 @@ One file: [`content/portfolio.config.ts`](./content/portfolio.config.ts).
   that follows the cursor, blinks, and breathes), `"avatar"` (the illustrated
   portrait at `public/avatar.jpg`), `"photo"`, or `"monogram"`. For a photo,
   drop the file at `public/portrait.jpg` (not committed) and flip the mode.
+- **Featured projects** — the big cards on the homepage and `/work`: one line
+  per project (`{ slug, show }`), `show: false` hides the card, the list order
+  is the display order. The write-ups themselves live in `content/projects.ts`.
 - **GitHub projects** — the "More from GitHub" section is built live from the
   GitHub API (stars, language, activity, refreshed hourly). Each repo in the
   config has `show: true | false`; the list order is the display order. Add a
