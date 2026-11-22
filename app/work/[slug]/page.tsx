@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ArchitectureGraph } from "@/components/viz/ArchitectureGraph";
 import { TechChip } from "@/components/ui/TechIcon";
 import { GithubIcon } from "@/components/ui/BrandIcons";
-import { getProject, projects } from "@/content/projects";
+import { getProject, projects, visibleProjects } from "@/content/projects";
 
 type Params = { slug: string };
 
@@ -37,9 +37,10 @@ export default async function CaseStudyPage({
   const project = getProject(slug);
   if (!project) notFound();
 
-  const idx = projects.findIndex((p) => p.slug === project.slug);
-  const prev = projects[(idx - 1 + projects.length) % projects.length];
-  const next = projects[(idx + 1) % projects.length];
+  const visible = visibleProjects;
+  const idx = visible.findIndex((p) => p.slug === project.slug);
+  const prev = visible[(idx - 1 + visible.length) % visible.length];
+  const next = visible[(idx + 1) % visible.length];
 
   return (
     <article className="mx-auto max-w-6xl px-5 pb-24 pt-36 sm:px-8 lg:pt-44">
