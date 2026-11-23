@@ -114,7 +114,7 @@ export default function PortraitCharacter() {
 
   // face silhouette (diamond-leaning: wide cheekbones, tapered jaw) reused for shading + clipping
   const FACE =
-    "M130 148 C130 110 150 92 180 92 C210 92 230 110 230 148 C230 165 234 176 238 190 C236 214 224 236 208 250 C198 259 189 264 180 266 C171 264 162 259 152 250 C136 236 124 214 122 190 C126 176 130 165 130 148 Z";
+    "M130 148 C130 110 150 92 180 92 C210 92 230 110 230 148 C231 163 235 176 238 190 C234 211 224 230 210 244 C206 248 202 251 198 254 L180 267 L162 254 C158 251 154 248 150 244 C136 230 126 211 122 190 C125 176 129 163 130 148 Z";
 
   return (
     <svg
@@ -202,6 +202,9 @@ export default function PortraitCharacter() {
         {/* cheekbone shading */}
         <ellipse cx="140" cy="202" rx="15" ry="20" fill="url(#pc-cheek)" />
         <ellipse cx="220" cy="202" rx="15" ry="20" fill="url(#pc-cheek)" />
+        {/* soft jawline definition */}
+        <path d="M126 196 C132 222 142 240 156 252" fill="none" stroke={SKIN_DEEP} strokeWidth="2.4" strokeLinecap="round" opacity="0.3" filter="url(#pc-soft)" clipPath="url(#pc-face)" />
+        <path d="M234 196 C228 222 218 240 204 252" fill="none" stroke={SKIN_DEEP} strokeWidth="2.4" strokeLinecap="round" opacity="0.3" filter="url(#pc-soft)" clipPath="url(#pc-face)" />
 
         {/* light stubble on jaw, chin and upper lip */}
         <g clipPath="url(#pc-face)">
@@ -250,25 +253,32 @@ export default function PortraitCharacter() {
         {/* upper lash lines */}
         <path d="M142 184 Q153 175.4 164 184" fill="none" stroke="#241c14" strokeWidth="2" strokeLinecap="round" />
         <path d="M196 184 Q207 175.4 218 184" fill="none" stroke="#241c14" strokeWidth="2" strokeLinecap="round" />
-        {/* blink lids */}
-        <motion.ellipse
-          cx="153"
-          cy="184"
-          rx="13"
-          ry="9"
-          fill={SKIN}
-          style={{ scaleY: 0, originX: "153px", originY: "184px" }}
-          {...lidMotion}
-        />
-        <motion.ellipse
-          cx="207"
-          cy="184"
-          rx="13"
-          ry="9"
-          fill={SKIN}
-          style={{ scaleY: 0, originX: "207px", originY: "184px" }}
-          {...lidMotion}
-        />
+        {/* blink lids — wrapped in a translate group so scaleY pivots on
+            the eye center itself (a px origin on the ellipse resolves
+            against its own bbox and the lid slides down onto the shirt
+            mid-blink) */}
+        <g transform="translate(153 184)">
+          <motion.ellipse
+            cx="0"
+            cy="0"
+            rx="13"
+            ry="9"
+            fill={SKIN}
+            style={{ scaleY: 0, originX: 0.5, originY: 0.5 }}
+            {...lidMotion}
+          />
+        </g>
+        <g transform="translate(207 184)">
+          <motion.ellipse
+            cx="0"
+            cy="0"
+            rx="13"
+            ry="9"
+            fill={SKIN}
+            style={{ scaleY: 0, originX: 0.5, originY: 0.5 }}
+            {...lidMotion}
+          />
+        </g>
 
         {/* thin round silver glasses + lens sheen */}
         <g stroke={FRAME} strokeWidth="2.3" fill="#ffffff" fillOpacity="0.05">
@@ -288,8 +298,8 @@ export default function PortraitCharacter() {
         <path
           d="M112 156
              C104 142 100 116 106 94
-             C119 64 147 52 180 52
-             C213 52 241 64 253 94
+             C119 66 147 56 180 56
+             C213 56 241 66 253 94
              C260 116 256 142 248 156
              C246 148 244 142 240 138
              C236 146 230 148 224 144
@@ -307,11 +317,11 @@ export default function PortraitCharacter() {
           <circle cx="108" cy="110" r="7.5" />
           <circle cx="104" cy="128" r="6.5" />
           <circle cx="114" cy="90" r="8" />
-          <circle cx="126" cy="72" r="9" />
-          <circle cx="146" cy="59" r="9" />
-          <circle cx="168" cy="52" r="9" />
-          <circle cx="192" cy="51" r="9" />
-          <circle cx="214" cy="58" r="9" />
+          <circle cx="126" cy="75" r="9" />
+          <circle cx="146" cy="62" r="9" />
+          <circle cx="168" cy="55" r="9" />
+          <circle cx="192" cy="54" r="9" />
+          <circle cx="214" cy="61" r="9" />
           <circle cx="234" cy="72" r="9" />
           <circle cx="248" cy="90" r="8" />
           <circle cx="254" cy="110" r="7.5" />
@@ -337,6 +347,16 @@ export default function PortraitCharacter() {
           <circle cx="238" cy="142" r="6.5" />
           <circle cx="115" cy="150" r="6" />
           <circle cx="245" cy="150" r="6" />
+        </g>
+        {/* graduated sideburns: small trailing curls fading down the
+            sides so the temples don't read as bare */}
+        <g fill={HAIR}>
+          <circle cx="113" cy="160" r="5" />
+          <circle cx="111" cy="169" r="4" />
+          <circle cx="112" cy="177" r="3" />
+          <circle cx="247" cy="160" r="5" />
+          <circle cx="249" cy="169" r="4" />
+          <circle cx="248" cy="177" r="3" />
         </g>
         {/* ring highlights on some hairline curls */}
         <g fill="none" stroke={CURL_HI} strokeWidth="1.7" strokeLinecap="round" opacity="0.85">
