@@ -162,9 +162,9 @@ export default function PortraitCharacter() {
         </clipPath>
       </defs>
 
-      {/* lower neck: drawn UNDER the polo so the shirt's curved neckline
-          forms the boundary — no hard bottom edge can ever show */}
-      <path d="M146 258 L146 316 L214 316 L214 258 Z" fill={SKIN_SHADE} />
+      {/* lower neck: tapered, top corners hidden behind the jaw, drawn
+          UNDER the polo so the shirt's curved neckline is the boundary */}
+      <path d="M160 258 L152 316 L208 316 L200 258 Z" fill={SKIN_SHADE} />
 
       {/* torso: black polo — follows gently, breathes */}
       <motion.g {...torsoMotion}>
@@ -185,7 +185,7 @@ export default function PortraitCharacter() {
           it overlaps the static lower neck in the same flat tone, so the
           junction stays invisible at every pose) */}
       <motion.g {...headMotion}>
-        <path d="M158 240 L158 282 L202 282 L202 240 Z" fill={SKIN_SHADE} />
+        <path d="M163 240 L160 282 L200 282 L197 240 Z" fill={SKIN_SHADE} />
         <ellipse cx="180" cy="252" rx="24" ry="9" fill={SKIN_DEEP} opacity="0.55" filter="url(#pc-soft)" />
         {/* ears */}
         <ellipse cx="122" cy="180" rx="9" ry="14" fill="url(#pc-skin)" />
@@ -283,34 +283,32 @@ export default function PortraitCharacter() {
 
         {/* hair: tight curls close to the skull, faded sides, ringlet
             fringe over the forehead — matched to his real cut */}
-        {/* curl mass: wide and forward like his, hairline low on the forehead */}
+        {/* one continuous curl mass: dome runs straight into the scalloped
+            hairline, so no background can show through */}
         <path
-          d="M110 156
-             C100 142 98 118 106 96
-             C116 62 146 48 180 48
-             C214 48 244 62 254 96
-             C262 118 260 142 250 156
-             C248 140 246 130 242 122
-             C244 110 238 102 230 102
-             C231 112 225 118 217 116
-             C219 106 212 100 204 102
-             C205 112 199 118 191 116
-             C192 106 186 100 178 102
-             C178 112 172 118 164 116
-             C165 106 159 100 151 102
-             C152 112 146 118 138 116
-             C137 108 132 104 126 106
-             C122 116 118 126 116 134
-             C113 142 111 150 110 156 Z"
+          d="M112 156
+             C104 142 100 116 106 94
+             C118 62 146 48 180 48
+             C214 48 242 62 254 94
+             C260 116 256 142 248 156
+             C246 148 244 142 240 138
+             C236 146 230 148 224 144
+             C220 150 212 152 206 146
+             C202 152 194 154 188 148
+             C184 154 176 154 172 148
+             C166 154 158 152 154 146
+             C148 152 140 150 136 144
+             C130 148 124 146 120 138
+             C116 142 114 148 112 156 Z"
           fill="url(#pc-hair)"
         />
-        {/* big irregular curl clumps around the silhouette (his curl scale) */}
+        {/* irregular curl clumps along the silhouette */}
         <g fill="#241f1a">
           <circle cx="108" cy="110" r="8" />
           <circle cx="104" cy="128" r="7" />
-          <circle cx="114" cy="92" r="9" />
-          <circle cx="126" cy="74" r="10" />
-          <circle cx="146" cy="60" r="10" />
+          <circle cx="114" cy="90" r="9" />
+          <circle cx="126" cy="72" r="10" />
+          <circle cx="146" cy="59" r="10" />
           <circle cx="168" cy="52" r="10" />
           <circle cx="192" cy="51" r="10" />
           <circle cx="214" cy="58" r="10" />
@@ -324,40 +322,33 @@ export default function PortraitCharacter() {
           <circle cx="202" cy="64" r="8" />
           <circle cx="224" cy="76" r="8" />
         </g>
-        {/* fringe: tight ringlets hanging low over the forehead, near the brows */}
+        {/* one ringlet row sitting ON the hairline edge (half merged into
+            the mass — an edge of curls, not a floating row) */}
         <g fill={HAIR}>
-          <circle cx="128" cy="130" r="8.5" />
-          <circle cx="142" cy="126" r="9" />
-          <circle cx="157" cy="129" r="8.5" />
-          <circle cx="172" cy="125" r="9" />
-          <circle cx="187" cy="128" r="8.5" />
-          <circle cx="202" cy="125" r="9" />
-          <circle cx="217" cy="129" r="8.5" />
-          <circle cx="231" cy="126" r="9" />
-          <circle cx="122" cy="145" r="7" />
-          <circle cx="136" cy="142" r="7.5" />
-          <circle cx="151" cy="146" r="7" />
-          <circle cx="166" cy="141" r="7.5" />
-          <circle cx="181" cy="145" r="7" />
-          <circle cx="196" cy="141" r="7.5" />
-          <circle cx="211" cy="146" r="7" />
-          <circle cx="226" cy="142" r="7.5" />
-          <circle cx="238" cy="144" r="7" />
+          <circle cx="122" cy="142" r="7" />
+          <circle cx="135" cy="146" r="6.5" />
+          <circle cx="148" cy="149" r="7" />
+          <circle cx="161" cy="151" r="6.5" />
+          <circle cx="174" cy="152" r="7" />
+          <circle cx="187" cy="151" r="6.5" />
+          <circle cx="200" cy="150" r="7" />
+          <circle cx="213" cy="148" r="6.5" />
+          <circle cx="226" cy="145" r="7" />
+          <circle cx="238" cy="142" r="6.5" />
+          <circle cx="115" cy="150" r="6" />
+          <circle cx="245" cy="150" r="6" />
         </g>
-        {/* ring highlights on some fringe curls */}
+        {/* ring highlights on some hairline curls */}
         <g fill="none" stroke={CURL_HI} strokeWidth="1.7" strokeLinecap="round" opacity="0.85">
-          <path d="M124 131 Q128 125 133 130" />
-          <path d="M153 130 Q157 124 162 129" />
-          <path d="M183 129 Q187 123 192 128" />
-          <path d="M213 130 Q217 124 222 129" />
-          <path d="M133 143 Q137 138 141 142" />
-          <path d="M163 142 Q167 137 171 141" />
-          <path d="M193 142 Q197 137 201 141" />
-          <path d="M223 143 Q227 138 231 142" />
+          <path d="M119 143 Q122 138 126 142" />
+          <path d="M145 150 Q148 145 152 149" />
+          <path d="M171 153 Q174 148 178 152" />
+          <path d="M197 151 Q200 146 204 150" />
+          <path d="M223 146 Q226 141 230 145" />
         </g>
-        {/* light side shading (his sides are short but curly, not skin-faded) */}
-        <path d="M106 96 C100 118 102 140 112 156 L124 148 C117 134 116 114 122 98 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
-        <path d="M254 96 C260 118 258 140 248 156 L236 148 C243 134 244 114 238 98 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
+        {/* light side shading (his sides are short but curly) */}
+        <path d="M106 94 C100 116 102 140 112 156 L124 148 C117 132 116 112 122 96 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
+        <path d="M254 94 C260 116 258 140 248 156 L236 148 C243 132 244 112 238 96 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
         {/* dense curl texture hooks across the mass */}
         <g fill="none" stroke="#3a332c" strokeWidth="2" strokeLinecap="round" opacity="0.95">
           <path d="M126 100 Q132 93 139 98" />
@@ -380,7 +371,7 @@ export default function PortraitCharacter() {
         <path d="M150 72 Q180 58 210 72" fill="none" stroke="#5a5045" strokeWidth="3" strokeLinecap="round" opacity="0.38" filter="url(#pc-soft)" />
         {/* soft shadow the fringe casts on the forehead */}
         <path
-          d="M126 146 C144 136 162 140 180 138 C198 140 216 136 234 146 L234 156 C216 146 198 150 180 148 C162 150 144 146 126 156 Z"
+          d="M128 150 C146 142 162 146 180 144 C198 146 214 142 232 150 L232 160 C214 152 198 156 180 154 C162 156 146 152 128 160 Z"
           fill="#000000"
           opacity="0.14"
           filter="url(#pc-soft)"
