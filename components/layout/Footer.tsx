@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { PenLine } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
@@ -11,13 +15,34 @@ const internal = [
   { href: "/contact", label: "Contact" },
 ];
 
+const WORDMARK = "marwantosolve";
+
 export function Footer() {
+  const [bounceKey, setBounceKey] = useState(0);
+  const reduce = useReducedMotion();
+
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <Link href="/" className="font-display text-2xl font-semibold tracking-tight">
-            marwan<span className="text-accent-text">.</span>
+          <Link
+            href="/"
+            className="font-display text-2xl font-semibold tracking-tight"
+            onMouseEnter={() => setBounceKey((k) => k + 1)}
+            onTouchStart={() => setBounceKey((k) => k + 1)}
+          >
+            <span key={bounceKey} className="inline-flex">
+              {WORDMARK.split("").map((ch, i) => (
+                <motion.span
+                  key={i}
+                  className={i < 6 ? "text-accent-text" : undefined}
+                  animate={reduce ? undefined : { y: [0, -5, 0] }}
+                  transition={{ delay: i * 0.045, duration: 0.34, ease: "easeOut" }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </span>
           </Link>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
             AI systems that reason, retrieve, adapt, and act.
