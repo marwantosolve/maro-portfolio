@@ -14,7 +14,7 @@ import {
   PORTRAIT CHARACTER — interactive cartoon Marwan
   ─────────────────────────────────────────────────────────────────
   Drawn from his portrait photo: dense dark curls hugging the skull
-  with a ringlet fringe over the forehead, long oval face, silver-
+  with a ringlet fringe over the forehead, diamond-leaning face, silver-
   green eyes, thin round silver glasses, thick straight brows,
   light stubble, black polo. Soft gradient shading for a 3D feel.
 
@@ -112,9 +112,9 @@ export default function PortraitCharacter() {
         },
       };
 
-  // face silhouette (long oval, defined jaw) reused for shading + clipping
+  // face silhouette (diamond-leaning: wide cheekbones, tapered jaw) reused for shading + clipping
   const FACE =
-    "M124 148 C124 108 148 92 180 92 C212 92 236 108 236 148 C236 184 230 216 212 242 C202 256 191 263 180 265 C169 263 158 256 148 242 C130 216 124 184 124 148 Z";
+    "M130 148 C130 110 150 92 180 92 C210 92 230 110 230 148 C230 165 234 176 238 190 C236 214 224 236 208 250 C198 259 189 264 180 266 C171 264 162 259 152 250 C136 236 124 214 122 190 C126 176 130 165 130 148 Z";
 
   return (
     <svg
@@ -288,8 +288,8 @@ export default function PortraitCharacter() {
         <path
           d="M112 156
              C104 142 100 116 106 94
-             C118 62 146 48 180 48
-             C214 48 242 62 254 94
+             C119 64 147 52 180 52
+             C213 52 241 64 253 94
              C260 116 256 142 248 156
              C246 148 244 142 240 138
              C236 146 230 148 224 144
@@ -304,23 +304,23 @@ export default function PortraitCharacter() {
         />
         {/* irregular curl clumps along the silhouette */}
         <g fill="#241f1a">
-          <circle cx="108" cy="110" r="8" />
-          <circle cx="104" cy="128" r="7" />
-          <circle cx="114" cy="90" r="9" />
-          <circle cx="126" cy="72" r="10" />
-          <circle cx="146" cy="59" r="10" />
-          <circle cx="168" cy="52" r="10" />
-          <circle cx="192" cy="51" r="10" />
-          <circle cx="214" cy="58" r="10" />
-          <circle cx="234" cy="72" r="10" />
-          <circle cx="248" cy="90" r="9" />
-          <circle cx="254" cy="110" r="8" />
-          <circle cx="256" cy="130" r="7" />
-          <circle cx="128" cy="84" r="8" />
-          <circle cx="150" cy="70" r="8" />
-          <circle cx="176" cy="62" r="8" />
-          <circle cx="202" cy="64" r="8" />
-          <circle cx="224" cy="76" r="8" />
+          <circle cx="108" cy="110" r="7.5" />
+          <circle cx="104" cy="128" r="6.5" />
+          <circle cx="114" cy="90" r="8" />
+          <circle cx="126" cy="72" r="9" />
+          <circle cx="146" cy="59" r="9" />
+          <circle cx="168" cy="52" r="9" />
+          <circle cx="192" cy="51" r="9" />
+          <circle cx="214" cy="58" r="9" />
+          <circle cx="234" cy="72" r="9" />
+          <circle cx="248" cy="90" r="8" />
+          <circle cx="254" cy="110" r="7.5" />
+          <circle cx="256" cy="130" r="6.5" />
+          <circle cx="128" cy="84" r="7.5" />
+          <circle cx="150" cy="70" r="7.5" />
+          <circle cx="176" cy="62" r="7.5" />
+          <circle cx="202" cy="64" r="7.5" />
+          <circle cx="224" cy="76" r="7.5" />
         </g>
         {/* one ringlet row sitting ON the hairline edge (half merged into
             the mass — an edge of curls, not a floating row) */}
@@ -364,11 +364,11 @@ export default function PortraitCharacter() {
           <path d="M194 94 Q200 87 207 92" />
           <path d="M214 102 Q220 95 227 100" />
           <path d="M234 112 Q240 105 247 110" />
-          <path d="M148 62 Q154 56 160 61" />
-          <path d="M196 58 Q202 52 208 57" />
+          <path d="M148 64 Q154 58 160 63" />
+          <path d="M196 60 Q202 54 208 59" />
         </g>
         {/* crown highlight, kept inside the mass */}
-        <path d="M150 72 Q180 58 210 72" fill="none" stroke="#5a5045" strokeWidth="3" strokeLinecap="round" opacity="0.38" filter="url(#pc-soft)" />
+        <path d="M150 74 Q180 62 210 74" fill="none" stroke="#5a5045" strokeWidth="3" strokeLinecap="round" opacity="0.38" filter="url(#pc-soft)" />
         {/* soft shadow the fringe casts on the forehead */}
         <path
           d="M128 150 C146 142 162 146 180 144 C198 146 214 142 232 150 L232 160 C214 152 198 156 180 154 C162 156 146 152 128 160 Z"
