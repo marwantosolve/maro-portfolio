@@ -219,16 +219,6 @@ export default function PortraitCharacter() {
             fill={SKIN_DEEP}
             opacity="0.2"
           />
-          <g fill={SKIN_DEEP} opacity="0.3">
-            <circle cx="150" cy="238" r="0.9" /><circle cx="158" cy="246" r="0.9" />
-            <circle cx="166" cy="252" r="0.9" /><circle cx="176" cy="256" r="0.9" />
-            <circle cx="186" cy="255" r="0.9" /><circle cx="196" cy="250" r="0.9" />
-            <circle cx="204" cy="243" r="0.9" /><circle cx="211" cy="235" r="0.9" />
-            <circle cx="143" cy="228" r="0.9" /><circle cx="217" cy="226" r="0.9" />
-            <circle cx="154" cy="230" r="0.9" /><circle cx="206" cy="232" r="0.9" />
-            <circle cx="170" cy="226" r="0.9" /><circle cx="190" cy="226" r="0.9" />
-          </g>
-          <ellipse cx="180" cy="221" rx="13" ry="3.4" fill={SKIN_DEEP} opacity="0.22" />
         </g>
 
         {/* nose: bridge highlight + shading */}
@@ -302,20 +292,20 @@ export default function PortraitCharacter() {
         {/* one continuous curl mass: dome runs straight into the scalloped
             hairline, so no background can show through */}
         <path
-          d="M112 156
-             C104 142 100 116 106 94
+          d="M112 152
+             C104 138 100 116 106 94
              C119 68 147 59 180 59
              C213 59 241 68 253 94
-             C260 116 256 142 248 156
-             C246 148 244 142 240 138
-             C236 146 230 148 224 144
-             C220 150 212 152 206 146
-             C202 152 194 154 188 148
-             C184 154 176 154 172 148
-             C166 154 158 152 154 146
-             C148 152 140 150 136 144
-             C130 148 124 146 120 138
-             C116 142 114 148 112 156 Z"
+             C260 116 256 138 248 152
+             C246 144 244 138 240 134
+             C236 142 230 144 224 140
+             C220 146 212 148 206 142
+             C202 148 194 150 188 144
+             C184 150 176 150 172 144
+             C166 150 158 148 154 142
+             C148 148 140 146 136 140
+             C130 144 124 142 120 134
+             C116 138 114 144 112 152 Z"
           fill="url(#pc-hair)"
         />
         {/* irregular curl clumps along the silhouette */}
@@ -341,34 +331,34 @@ export default function PortraitCharacter() {
         {/* one ringlet row sitting ON the hairline edge (half merged into
             the mass — an edge of curls, not a floating row) */}
         <g fill={HAIR}>
-          <circle cx="122" cy="142" r="7" />
-          <circle cx="135" cy="146" r="6.5" />
-          <circle cx="148" cy="149" r="7" />
-          <circle cx="161" cy="151" r="6.5" />
-          <circle cx="174" cy="152" r="7" />
-          <circle cx="187" cy="151" r="6.5" />
-          <circle cx="200" cy="150" r="7" />
-          <circle cx="213" cy="148" r="6.5" />
-          <circle cx="226" cy="145" r="7" />
-          <circle cx="238" cy="142" r="6.5" />
-          <circle cx="115" cy="150" r="6" />
-          <circle cx="245" cy="150" r="6" />
+          <circle cx="122" cy="138" r="7" />
+          <circle cx="135" cy="142" r="6.5" />
+          <circle cx="148" cy="145" r="7" />
+          <circle cx="161" cy="147" r="6.5" />
+          <circle cx="174" cy="148" r="7" />
+          <circle cx="187" cy="147" r="6.5" />
+          <circle cx="200" cy="146" r="7" />
+          <circle cx="213" cy="144" r="6.5" />
+          <circle cx="226" cy="141" r="7" />
+          <circle cx="238" cy="138" r="6.5" />
+          <circle cx="115" cy="146" r="6" />
+          <circle cx="245" cy="146" r="6" />
         </g>
         {/* graduated sides: a short wedge at each temple that runs from
             the curl mass down the sideburn and fades out toward the ear */}
-        <path d="M112 147 C109 155 109 167 113 178 L125 176 C121 167 122 156 127 148 Z" fill="url(#pc-fade)" />
-        <path d="M248 147 C251 155 251 167 247 178 L235 176 C239 167 238 156 233 148 Z" fill="url(#pc-fade)" />
+        <path d="M112 144 C109 153 109 167 113 178 L130 176 C126 167 127 155 133 144 Z" fill="url(#pc-fade)" />
+        <path d="M248 144 C251 153 251 167 247 178 L230 176 C234 167 233 155 227 144 Z" fill="url(#pc-fade)" />
         {/* ring highlights on some hairline curls */}
         <g fill="none" stroke={CURL_HI} strokeWidth="1.7" strokeLinecap="round" opacity="0.85">
-          <path d="M119 143 Q122 138 126 142" />
-          <path d="M145 150 Q148 145 152 149" />
-          <path d="M171 153 Q174 148 178 152" />
-          <path d="M197 151 Q200 146 204 150" />
-          <path d="M223 146 Q226 141 230 145" />
+          <path d="M119 139 Q122 134 126 138" />
+          <path d="M145 146 Q148 141 152 145" />
+          <path d="M171 149 Q174 144 178 148" />
+          <path d="M197 147 Q200 142 204 146" />
+          <path d="M223 142 Q226 137 230 141" />
         </g>
         {/* light side shading (his sides are short but curly) */}
-        <path d="M106 94 C100 116 102 140 112 156 L124 148 C117 132 116 112 122 96 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
-        <path d="M254 94 C260 116 258 140 248 156 L236 148 C243 132 244 112 238 96 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
+        <path d="M106 94 C100 116 102 136 112 152 L124 144 C117 132 116 112 122 96 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
+        <path d="M254 94 C260 116 258 136 248 152 L236 144 C243 132 244 112 238 96 Z" fill="#000000" opacity="0.15" filter="url(#pc-soft)" />
         {/* dense curl texture hooks across the mass */}
         <g fill="none" stroke="#3a332c" strokeWidth="2" strokeLinecap="round" opacity="0.95">
           <path d="M126 100 Q132 93 139 98" />
@@ -391,7 +381,7 @@ export default function PortraitCharacter() {
         <path d="M150 74 Q180 62 210 74" fill="none" stroke="#5a5045" strokeWidth="3" strokeLinecap="round" opacity="0.38" filter="url(#pc-soft)" />
         {/* soft shadow the fringe casts on the forehead */}
         <path
-          d="M128 150 C146 142 162 146 180 144 C198 146 214 142 232 150 L232 160 C214 152 198 156 180 154 C162 156 146 152 128 160 Z"
+          d="M128 146 C146 138 162 142 180 140 C198 142 214 138 232 146 L232 156 C214 148 198 152 180 150 C162 152 146 148 128 156 Z"
           fill="#000000"
           opacity="0.14"
           filter="url(#pc-soft)"
