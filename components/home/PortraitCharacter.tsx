@@ -304,8 +304,8 @@ export default function PortraitCharacter() {
         <path
           d="M112 156
              C104 142 100 116 106 94
-             C119 66 147 56 180 56
-             C213 56 241 66 253 94
+             C119 68 147 59 180 59
+             C213 59 241 68 253 94
              C260 116 256 142 248 156
              C246 148 244 142 240 138
              C236 146 230 148 224 144
@@ -320,18 +320,18 @@ export default function PortraitCharacter() {
         />
         {/* irregular curl clumps along the silhouette */}
         <g fill="#241f1a">
-          <circle cx="108" cy="110" r="7.5" />
-          <circle cx="104" cy="128" r="6.5" />
+          <circle cx="108" cy="110" r="7" />
+          <circle cx="105" cy="128" r="6" />
           <circle cx="114" cy="90" r="8" />
-          <circle cx="126" cy="75" r="9" />
-          <circle cx="146" cy="62" r="9" />
-          <circle cx="168" cy="55" r="9" />
-          <circle cx="192" cy="54" r="9" />
-          <circle cx="214" cy="61" r="9" />
+          <circle cx="126" cy="78" r="9" />
+          <circle cx="146" cy="65" r="9" />
+          <circle cx="168" cy="58" r="9" />
+          <circle cx="192" cy="57" r="9" />
+          <circle cx="214" cy="64" r="9" />
           <circle cx="234" cy="72" r="9" />
           <circle cx="248" cy="90" r="8" />
-          <circle cx="254" cy="110" r="7.5" />
-          <circle cx="256" cy="130" r="6.5" />
+          <circle cx="252" cy="110" r="7" />
+          <circle cx="255" cy="130" r="6" />
           <circle cx="128" cy="84" r="7.5" />
           <circle cx="150" cy="70" r="7.5" />
           <circle cx="176" cy="62" r="7.5" />
@@ -356,8 +356,8 @@ export default function PortraitCharacter() {
         </g>
         {/* graduated sides: a short wedge at each temple that runs from
             the curl mass down the sideburn and fades out toward the ear */}
-        <path d="M110 148 C106 156 105 168 108 181 L124 179 C120 168 121 157 126 149 Z" fill="url(#pc-fade)" />
-        <path d="M250 148 C254 156 255 168 252 181 L236 179 C240 168 239 157 234 149 Z" fill="url(#pc-fade)" />
+        <path d="M112 147 C109 155 109 167 113 178 L125 176 C121 167 122 156 127 148 Z" fill="url(#pc-fade)" />
+        <path d="M248 147 C251 155 251 167 247 178 L235 176 C239 167 238 156 233 148 Z" fill="url(#pc-fade)" />
         {/* ring highlights on some hairline curls */}
         <g fill="none" stroke={CURL_HI} strokeWidth="1.7" strokeLinecap="round" opacity="0.85">
           <path d="M119 143 Q122 138 126 142" />
