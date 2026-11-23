@@ -64,7 +64,8 @@ export function Hero() {
           >
             I&apos;m an AI engineer and researcher working across large
             language models, agentic and multi-agent systems, retrieval, and
-            model adaptation — from research concepts to production.
+            model adaptation — from research ideas
+            to working systems.
           </motion.p>
 
           <motion.div {...fadeUp(0.3)} className="mt-10 flex flex-wrap items-center gap-4">

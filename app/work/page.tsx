@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FlagshipCard, ProjectCard, CompactCard } from "@/components/work/ProjectCard";
+import { GitHubRepoList } from "@/components/work/GitHubRepoList";
 import { flagship, majorWork, additionalWork } from "@/content/projects";
+import { getGitHubRepoMap, statsFor } from "@/lib/github";
+import { portfolioConfig } from "@/content/portfolio.config";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -10,7 +13,9 @@ export const metadata: Metadata = {
     "Selected projects — multi-agent evaluation, agent observability, RAG platforms, LLM adaptation, and computer vision.",
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const repoMap = await getGitHubRepoMap();
+
   return (
     <div className="mx-auto max-w-6xl px-5 pb-24 pt-36 sm:px-8 lg:pt-44">
       <Reveal>
@@ -21,8 +26,8 @@ export default function WorkPage() {
           Research, systems, and studies — built end to end.
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
-          A flagship research effort, three production-grade systems, and a
-          benchmarking study. Different shapes of engineering, same standard.
+          A flagship research effort, three end-to-end systems, and a
+          computer-vision tracking study. Different shapes of engineering, same standard.
         </p>
       </Reveal>
 
@@ -48,7 +53,11 @@ export default function WorkPage() {
         <div className="mt-4">
           {majorWork.map((project, i) => (
             <Reveal key={project.slug} delay={i * 0.05}>
-              <ProjectCard project={project} index={i} />
+              <ProjectCard
+                project={project}
+                index={i}
+                stats={statsFor(repoMap, project.repo)}
+              />
             </Reveal>
           ))}
         </div>
@@ -62,9 +71,36 @@ export default function WorkPage() {
         <div className="mt-4">
           {additionalWork.map((project) => (
             <Reveal key={project.slug}>
-              <CompactCard project={project} />
+              <CompactCard
+                project={project}
+                stats={statsFor(repoMap, project.repo)}
+              />
             </Reveal>
           ))}
+        </div>
+      </div>
+
+      {/* more from github — live, curated in content/portfolio.config.ts */}
+      <div className="mt-16">
+        <Reveal>
+          <SectionHeader index="04" title="More from GitHub" />
+        </Reveal>
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">
+          Live from{" "}
+          <a
+            href={`https://github.com/${portfolioConfig.github.username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-text underline underline-offset-4"
+          >
+            @{portfolioConfig.github.username}
+          </a>{" "}
+          — stars, languages and activity straight from the GitHub API.
+        </p>
+        <div className="mt-6">
+          <Reveal>
+            <GitHubRepoList />
+          </Reveal>
         </div>
       </div>
     </div>
