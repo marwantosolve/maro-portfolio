@@ -147,6 +147,12 @@ export default function PortraitCharacter() {
           <stop offset="35%" stopColor={POLO} />
           <stop offset="100%" stopColor="#0b0e13" />
         </linearGradient>
+        {/* sideburn fade: solid at the curl mass, transparent at the tip */}
+        <linearGradient id="pc-fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={HAIR} />
+          <stop offset="55%" stopColor={HAIR} />
+          <stop offset="100%" stopColor={HAIR} stopOpacity="0" />
+        </linearGradient>
         <radialGradient id="pc-cheek" cx="0.5" cy="0.5" r="0.5">
           <stop offset="0%" stopColor={SKIN_SHADE} stopOpacity="0.4" />
           <stop offset="100%" stopColor={SKIN_SHADE} stopOpacity="0" />
@@ -348,16 +354,10 @@ export default function PortraitCharacter() {
           <circle cx="115" cy="150" r="6" />
           <circle cx="245" cy="150" r="6" />
         </g>
-        {/* graduated sideburns: small trailing curls fading down the
-            sides so the temples don't read as bare */}
-        <g fill={HAIR}>
-          <circle cx="113" cy="160" r="5" />
-          <circle cx="111" cy="169" r="4" />
-          <circle cx="112" cy="177" r="3" />
-          <circle cx="247" cy="160" r="5" />
-          <circle cx="249" cy="169" r="4" />
-          <circle cx="248" cy="177" r="3" />
-        </g>
+        {/* graduated sides: a short wedge at each temple that runs from
+            the curl mass down the sideburn and fades out toward the ear */}
+        <path d="M110 148 C106 156 105 168 108 181 L124 179 C120 168 121 157 126 149 Z" fill="url(#pc-fade)" />
+        <path d="M250 148 C254 156 255 168 252 181 L236 179 C240 168 239 157 234 149 Z" fill="url(#pc-fade)" />
         {/* ring highlights on some hairline curls */}
         <g fill="none" stroke={CURL_HI} strokeWidth="1.7" strokeLinecap="round" opacity="0.85">
           <path d="M119 143 Q122 138 126 142" />
