@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -15,9 +16,14 @@ const links = [
   { href: "/contact", label: "Contact", index: "05" },
 ];
 
+const WORDMARK = "marwantosolve";
+
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  // bump to replay the letter bounce (hover/tap); first mount plays it once
+  const [bounceKey, setBounceKey] = useState(0);
+  const reduce = useReducedMotion();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-md">
@@ -26,8 +32,21 @@ export function Nav() {
           href="/"
           className="font-display text-lg font-semibold tracking-tight"
           onClick={() => setOpen(false)}
+          onMouseEnter={() => setBounceKey((k) => k + 1)}
+          onTouchStart={() => setBounceKey((k) => k + 1)}
         >
-          marwan<span className="text-accent-text">.</span>
+          <span key={bounceKey} className="inline-flex">
+            {WORDMARK.split("").map((ch, i) => (
+              <motion.span
+                key={i}
+                className={i < 6 ? "text-accent-text" : undefined}
+                animate={reduce ? undefined : { y: [0, -5, 0] }}
+                transition={{ delay: i * 0.045, duration: 0.34, ease: "easeOut" }}
+              >
+                {ch}
+              </motion.span>
+            ))}
+          </span>
         </Link>
 
         {/* desktop */}
