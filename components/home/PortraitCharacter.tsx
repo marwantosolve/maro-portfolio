@@ -177,12 +177,12 @@ export default function PortraitCharacter() {
         <circle cx="180" cy="346" r="2.4" fill="#2e3542" />
       </motion.g>
 
-      {/* neck + shadow cast by the chin */}
-      <path d="M158 240 L158 292 C158 301 202 301 202 292 L202 240 Z" fill={SKIN_SHADE} />
-      <ellipse cx="180" cy="252" rx="24" ry="9" fill={SKIN_DEEP} opacity="0.55" filter="url(#pc-soft)" />
-
-      {/* head — tilts toward the cursor */}
+      {/* head — tilts toward the cursor (neck travels with it so the
+          chin never lifts off and exposes an artifact) */}
       <motion.g {...headMotion}>
+        {/* neck + shadow cast by the chin (inside the head group) */}
+        <path d="M158 240 L158 308 L202 308 L202 240 Z" fill={SKIN_SHADE} />
+        <ellipse cx="180" cy="252" rx="24" ry="9" fill={SKIN_DEEP} opacity="0.55" filter="url(#pc-soft)" />
         {/* ears */}
         <ellipse cx="122" cy="180" rx="9" ry="14" fill="url(#pc-skin)" />
         <ellipse cx="238" cy="180" rx="9" ry="14" fill="url(#pc-skin)" />
@@ -277,56 +277,81 @@ export default function PortraitCharacter() {
         <path d="M145 175 A17.5 17.5 0 0 1 159 169" fill="none" stroke="#ffffff" strokeWidth="1.7" strokeLinecap="round" opacity="0.55" />
         <path d="M199 175 A17.5 17.5 0 0 1 213 169" fill="none" stroke="#ffffff" strokeWidth="1.7" strokeLinecap="round" opacity="0.55" />
 
-        {/* hair: one solid mass hugging the skull, ringlet fringe on the forehead */}
+        {/* hair: tight curls close to the skull, faded sides, ringlet
+            fringe over the forehead — matched to his real cut */}
+        {/* curl mass: close-cropped, continuous down the sides */}
         <path
-          d="M118 158
-             C108 148 104 128 110 106
-             C116 70 146 50 180 50
-             C214 50 244 70 250 106
-             C256 128 252 148 242 158
-             C240 142 238 130 232 120
-             C234 108 230 100 222 98
-             C224 108 218 114 210 112
-             C212 102 206 96 197 97
-             C199 107 193 113 185 111
-             C186 101 180 96 172 98
-             C172 108 166 113 158 111
-             C159 102 153 97 145 99
-             C147 109 141 115 133 112
-             C132 122 126 130 122 134
-             C120 142 119 150 118 158 Z"
+          d="M120 158
+             C112 146 110 126 115 106
+             C121 74 149 56 180 56
+             C211 56 239 74 245 106
+             C250 126 248 146 240 158
+             C236 146 234 136 232 126
+             C232 114 226 106 218 106
+             C219 114 214 119 207 118
+             C208 110 203 104 196 105
+             C197 113 192 118 185 117
+             C186 109 181 104 174 105
+             C174 113 169 118 162 117
+             C162 109 157 104 150 106
+             C151 114 146 119 139 118
+             C138 112 134 108 129 108
+             C126 116 124 124 123 132
+             C121 140 120 148 120 158 Z"
           fill="url(#pc-hair)"
         />
-        {/* loose ringlets hanging from the fringe */}
+        {/* fringe: two overlapping rows of tight ringlets — a continuous
+            curl band, no skin showing through */}
         <g fill="url(#pc-hair)">
-          <circle cx="134" cy="116" r="8" />
-          <circle cx="148" cy="112" r="7" />
-          <circle cx="162" cy="114" r="8" />
-          <circle cx="176" cy="110" r="7" />
-          <circle cx="190" cy="113" r="8" />
-          <circle cx="204" cy="110" r="7" />
-          <circle cx="218" cy="114" r="8" />
-          <circle cx="126" cy="128" r="7" />
-          <circle cx="232" cy="126" r="7" />
+          <circle cx="136" cy="111" r="6.4" />
+          <circle cx="147" cy="109" r="6.4" />
+          <circle cx="158" cy="110" r="6.4" />
+          <circle cx="169" cy="108" r="6.4" />
+          <circle cx="180" cy="109" r="6.4" />
+          <circle cx="191" cy="108" r="6.4" />
+          <circle cx="202" cy="109" r="6.4" />
+          <circle cx="213" cy="110" r="6.4" />
+          <circle cx="224" cy="111" r="6.4" />
+          <circle cx="131" cy="122" r="6" />
+          <circle cx="142" cy="120" r="5.5" />
+          <circle cx="153" cy="123" r="6.2" />
+          <circle cx="164" cy="119" r="5.6" />
+          <circle cx="175" cy="122" r="6.3" />
+          <circle cx="186" cy="120" r="5.5" />
+          <circle cx="197" cy="123" r="6.2" />
+          <circle cx="208" cy="119" r="5.6" />
+          <circle cx="219" cy="122" r="6" />
+          <circle cx="229" cy="120" r="5.5" />
+          <circle cx="125" cy="132" r="5.4" />
+          <circle cx="235" cy="131" r="5.4" />
         </g>
-        {/* curl texture */}
-        <g fill="none" stroke={CURL_HI} strokeWidth="2" strokeLinecap="round" opacity="0.75">
-          <path d="M130 100 Q136 94 143 99" />
-          <path d="M148 84 Q155 78 162 84" />
-          <path d="M170 72 Q177 66 184 72" />
-          <path d="M194 74 Q201 68 208 75" />
-          <path d="M216 88 Q222 82 228 89" />
-          <path d="M120 118 Q126 112 132 117" />
-          <path d="M228 116 Q234 110 240 116" />
-          <path d="M140 116 Q146 111 152 116" />
-          <path d="M160 106 Q166 101 172 106" />
-          <path d="M182 104 Q188 99 194 105" />
-          <path d="M204 108 Q210 103 216 109" />
-          <path d="M156 94 Q162 89 168 94" />
-          <path d="M186 90 Q192 85 198 91" />
+        {/* fade shading on the sides */}
+        <path d="M114 106 C110 128 112 148 121 160 L132 152 C126 140 125 122 130 108 Z" fill="#000000" opacity="0.28" filter="url(#pc-soft)" />
+        <path d="M246 106 C250 128 248 148 239 160 L228 152 C234 140 235 122 230 108 Z" fill="#000000" opacity="0.28" filter="url(#pc-soft)" />
+        {/* tight curl texture across the dome */}
+        <g fill="none" stroke={CURL_HI} strokeWidth="2" strokeLinecap="round" opacity="0.85">
+          <path d="M134 98 Q139 93 145 97" />
+          <path d="M150 84 Q155 79 161 83" />
+          <path d="M168 72 Q173 67 179 71" />
+          <path d="M187 71 Q192 66 198 70" />
+          <path d="M206 78 Q211 73 217 77" />
+          <path d="M222 92 Q227 87 233 91" />
+          <path d="M126 112 Q131 107 137 111" />
+          <path d="M142 100 Q147 95 153 99" />
+          <path d="M160 92 Q165 87 171 91" />
+          <path d="M178 88 Q183 83 189 87" />
+          <path d="M196 90 Q201 85 207 89" />
+          <path d="M213 98 Q218 93 224 97" />
+          <path d="M229 112 Q234 107 239 111" />
+          <path d="M152 70 Q157 65 163 69" />
+          <path d="M196 66 Q201 61 207 65" />
+          <path d="M143 114 Q148 110 153 113" />
+          <path d="M165 112 Q170 108 175 111" />
+          <path d="M187 112 Q192 108 197 111" />
+          <path d="M209 114 Q214 110 219 113" />
         </g>
         {/* crown highlight */}
-        <path d="M140 66 Q180 48 220 66" fill="none" stroke="#5a5045" strokeWidth="4" strokeLinecap="round" opacity="0.55" filter="url(#pc-soft)" />
+        <path d="M144 68 Q180 52 216 68" fill="none" stroke="#5a5045" strokeWidth="3.4" strokeLinecap="round" opacity="0.5" filter="url(#pc-soft)" />
         {/* soft shadow the fringe casts on the forehead */}
         <path
           d="M128 118 C144 108 162 112 180 110 C198 112 216 108 232 118 L232 128 C216 118 198 122 180 120 C162 122 144 118 128 128 Z"
